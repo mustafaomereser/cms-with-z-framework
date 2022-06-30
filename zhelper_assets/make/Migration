@@ -1,0 +1,14 @@
+<?php
+class {name}
+{
+
+    static $table = "{table}";
+    static $db = 'local';
+
+    public static function columns()
+    {
+        return [
+            'id' => ['primary']
+        ];
+    }
+}
