@@ -21,4 +21,5 @@ admin access:
 > url: http://localhost/admin
 
 > username: admin
+
 > password: 123456
