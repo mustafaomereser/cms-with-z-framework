@@ -6,7 +6,9 @@ connect your database
 // if you do not know how you do, you can read my z-framework document.
 
 use zhelper
+``` php
 > php zhelper db migrate fresh
+```
 
 and add
 ```sql
@@ -16,7 +18,7 @@ this sql code for users table.
 
 admin access:
 
-url: http://localhost/admin
+> url: http://localhost/admin
 
-username: admin
-password: 123456
+> username: admin
+> password: 123456

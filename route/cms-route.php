@@ -2,7 +2,6 @@
 
 use App\Helpers\Theme;
 use App\Models\Contents;
-use Core\Crypter;
 use Core\Facedas\Lang;
 use Core\Route;
 
