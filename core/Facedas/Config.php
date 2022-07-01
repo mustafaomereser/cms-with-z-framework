@@ -53,9 +53,11 @@ class Config
         $arr = self::get($config);
 
         foreach ($sets as $key => $set)
-            if (!empty($set)) $arr[$key] = $set;
-            else unset($arr[$key]);
+            if (!empty($set))
+                $arr[$key] = $set;
+            else
+                unset($arr[$key]);
 
-        return file_put_contents(strstr($path, '.php') ? $path : "$path.php", "<?php \nreturn " . var_export($arr, true) . ";");
+        file_put_contents(strstr($path, '.php') ? $path : "$path.php", "<?php \nreturn " . var_export($arr, true) . ";");
     }
 }

@@ -76,7 +76,7 @@ class DB
             return $this->prepare("SELECT * FROM $this->table WHERE id = " . $this->lastID)->fetch(\PDO::FETCH_ASSOC);
         }
 
-        return false;
+        abort(500);
     }
 
     public function update(array $sets)

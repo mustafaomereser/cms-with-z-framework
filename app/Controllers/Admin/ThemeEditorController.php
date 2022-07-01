@@ -25,9 +25,9 @@ class ThemeEditorController
         if (is_dir($path)) {
             $scans = array_values(array_diff(scandir($path), ['.', '..']));
             foreach ($scans as $key => $scan) $scans[$key] = "$path/$scan";
-            return view('theme_editor.index', ['title' => 'Tema Editörü', 'scans' => $scans], 'main');
+            return view('theme_editor.index', ['title' => _l('admin.pages.theme-editor.title'), 'scans' => $scans], 'main');
         } else {
-            return view('theme_editor.edit', ['title' => 'Dosya Düzenle', 'file' => $path], 'main');
+            return view('theme_editor.edit', ['title' => _l('admin.pages.theme-editor.file-title'), 'file' => $path], 'main');
         }
     }
 
@@ -71,16 +71,16 @@ class ThemeEditorController
         if (strstr($validated['name'], '.')) {
             if (!file_exists($name)) {
                 file_put_contents($name, '//');
-                Alerts::success('Dosya oluşturuldu.');
+                Alerts::success(_l('admin.pages.theme-editor.messages.file-created'));
             } else {
-                Alerts::danger('Böyle bir dosya zaten var!');
+                Alerts::danger(_l('admin.pages.theme-editor.messages.file-already-there'));
             }
         } else {
             if (!is_dir($name)) {
-                if (@mkdir($name, 0777, true)) Alerts::success('Klasör oluşturuldu.');
-                else Alerts::danger('Klasör oluşturulamadı!');
+                if (@mkdir($name, 0777, true)) Alerts::success(_l('admin.pages.theme-editor.messages.folder-created'));
+                else Alerts::danger(_l('admin.pages.theme-editor.messages.folder-create-fail'));
             } else {
-                Alerts::danger('Böyle bir klasör zaten mevcut!');
+                Alerts::danger('admin.pages.theme-editor.messages.folder-already-there');
             }
         }
 
@@ -97,8 +97,8 @@ class ThemeEditorController
             'content' => ['required']
         ]);
 
-        if (file_put_contents($validated['file'], $validated['content'])) Alerts::success('Dosya başarı ile güncellendi.');
-        else Alerts::danger('Dosya güncellenemedi!');
+        if (file_put_contents($validated['file'], $validated['content'])) Alerts::success(_l('admin.pages.theme-editor.messages.file-updated'));
+        else Alerts::danger(_l('admin.pages.theme-editor.messages.file-update-fail'));
 
         return Response::json(Alerts::get());
     }

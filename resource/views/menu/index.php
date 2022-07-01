@@ -7,7 +7,7 @@ use Core\Route;
 <div class="d-flex flex-stack mb-5">
     <!--begin::Search-->
     <div class="d-flex align-items-center position-relative my-1">
-        <input type="text" data-kt-docs-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Ara" />
+        <input type="text" data-kt-docs-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="<?= _l('admin.search') ?>" />
     </div>
     <!--end::Search-->
 
@@ -15,7 +15,7 @@ use Core\Route;
     <div class="d-flex justify-content-end" data-kt-docs-table-toolbar="base">
         <!--begin::Add customer-->
         <a href="<?= Route::name('admin.menu.create') ?>" class="btn btn-primary">
-            Menü Ekle
+            <?= _l('admin.pages.menu.index.add-new') ?>
         </a>
     </div>
 </div>
@@ -24,10 +24,10 @@ use Core\Route;
     <thead>
         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
             <th class="text-center" width='90'>&nbsp;</th>
-            <th>Kimliği</th>
-            <th>İsim</th>
-            <th>Baş Menüsü</th>
-            <th>Bağlı Olduğu Yazı</th>
+            <th><?= _l('admin.pages.menu.index.th-id') ?></th>
+            <th><?= _l('admin.pages.menu.index.th-name') ?></th>
+            <th><?= _l('admin.pages.menu.index.th-parent') ?></th>
+            <th><?= _l('admin.pages.menu.index.th-content') ?></th>
             <th class="text-center" width='90'>&nbsp;</th>
         </tr>
     </thead>

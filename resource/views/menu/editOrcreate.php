@@ -37,7 +37,7 @@ use Core\Route;
             <?php foreach (Lang::list() as $key => $lang) : ?>
                 <div class="tab-pane fade<?= $key != 0 ?: ' show active' ?>" id="name-<?= $lang ?>" role="tabpanel">
                     <div class="fv-row fv-plugins-icon-container">
-                        <label class="fs-5 fw-bold mb-2">Başlık</label>
+                        <label class="fs-5 fw-bold mb-2"><?=_l('admin.pages.menu.index.th-name')?></label>
                         <input type="text" class="form-control" placeholder="Menü Başlığı" name="name[<?= $lang ?>]" value="<?= @$menu->name[$lang] ?>">
                     </div>
                 </div>

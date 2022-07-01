@@ -20,7 +20,7 @@ class ThemesController
      */
     public function index()
     {
-        return view('themes.index', ['title' => 'Temalar'], 'main');
+        return view('themes.index', ['title' => _l('admin.pages.themes.title')], 'main');
     }
 
     /** Show page | GET: /id
@@ -68,13 +68,13 @@ class ThemesController
             if (in_array($theme, Theme::list())) {
                 Config::set('app', ['theme' => $theme]);
                 $return['status'] = 1;
-                Alerts::success('Tema değiştirildi.');
+                Alerts::success(_l('admin.pages.themes.messages.updated'));
             }
         } else {
-            Alerts::warning('Tema zaten aynı.');
+            Alerts::warning(_l('admin.pages.themes.messages.already-same'));
         }
 
-        if (!$return['status']) Alerts::danger('Tema değiştirilemedi!');
+        if (!$return['status']) Alerts::danger(_l('admin.pages.themes.messages.update-fail'));
         $return['alerts'] = Alerts::get();
 
         return Response::json($return);

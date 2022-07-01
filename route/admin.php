@@ -13,6 +13,7 @@ use App\Controllers\Admin\HomeController;
 use App\Controllers\Admin\MenuController;
 use App\Controllers\Admin\ThemeEditorController;
 use App\Controllers\Admin\ThemesController;
+use Core\Facedas\Auth as FacedasAuth;
 
 Route::$preURL = '/admin';
 
@@ -20,6 +21,13 @@ Middleware::middleware([Guest::class], function ($declined) {
     if (count($declined)) return;
 
     Route::resource('/login', LoginController::class);
+});
+
+Middleware::middleware([Auth::class], function () {
+    Route::any('/logout', function () {
+        FacedasAuth::logout();
+        return redirect('/admin');
+    }, ['name' => 'admin.logout']);
 });
 
 Middleware::middleware([Auth::class, IsAdmin::class], function ($declined) {

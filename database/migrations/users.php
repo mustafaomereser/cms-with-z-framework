@@ -12,6 +12,7 @@ class Users
             'username' => ['varchar:50', 'charset:utf8:general_ci'],
             'password' => ['varchar:50', 'charset:utf8:general_ci'],
             'email' => ['varchar:50', 'charset:utf8:general_ci', 'unique'],
+            'avatar' => ['text', 'charset:utf8:general_ci', 'default:/admin_assets/media/avatars/300-15.jpg'],
             'api_token' => ['varchar:60', 'required', 'charset:utf8:general_ci']
         ];
     }

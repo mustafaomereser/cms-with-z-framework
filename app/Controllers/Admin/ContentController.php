@@ -64,7 +64,7 @@ class ContentController
                 break;
 
             default:
-                abort(400, 'Böyle bir seçenek yok.');
+                abort(400, _l('admin.here-is-none-option'));
         }
     }
 

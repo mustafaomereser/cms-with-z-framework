@@ -2,6 +2,7 @@
 
 use Core\Csrf;
 use Core\Facedas\Alerts;
+use Core\Facedas\Auth;
 use Core\Facedas\Config;
 use Core\Facedas\Lang;
 use Core\Route;
@@ -57,7 +58,7 @@ use Core\Route;
                     <!--end::Mobile menu toggle-->
                     <!--begin::Mobile logo-->
                     <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
-                        <a href="index-2.html" class="d-lg-none">
+                        <a href="<?= Route::name('admin.home.index') ?>" class="d-lg-none">
                             <img alt="Logo" src="/admin_assets/media/logos/default.svg" class="h-30px" />
                         </a>
                     </div>
@@ -66,7 +67,7 @@ use Core\Route;
                     <div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1" id="kt_app_header_wrapper">
                         <!--begin::Page title-->
                         <div data-kt-swapper="true" data-kt-swapper-mode="{default: 'prepend', lg: 'prepend'}" data-kt-swapper-parent="{default: '#kt_app_content_container', lg: '#kt_app_header_wrapper'}" class="page-title d-flex flex-column justify-content-center flex-wrap me-3 mb-5 mb-lg-0">
-                            <a href="/" class="btn btn-danger btn-sm">Siteye Git</a>
+                            <a href="/" class="btn btn-danger btn-sm"><?= _l('admin.go-to-site') ?></a>
                         </div>
                         <!--end::Page title-->
                         <!--begin::Navbar-->
@@ -105,7 +106,7 @@ use Core\Route;
                                         <!--end::Svg Icon-->
                                         <!--end::Icon-->
                                         <!--begin::Input-->
-                                        <input type="text" class="search-input form-control form-control-solid ps-13" name="search" value="" placeholder="Search..." data-kt-search-element="input" />
+                                        <input type="text" class="search-input form-control form-control-solid ps-13" name="search" placeholder="<?= _l('admin.search') ?>" data-kt-search-element="input" />
                                         <!--end::Input-->
                                         <!--begin::Spinner-->
                                         <span class="position-absolute top-50 end-0 translate-middle-y lh-0 d-none me-5" data-kt-search-element="spinner">
@@ -929,63 +930,26 @@ use Core\Route;
                                 <!--end::Menu wrapper-->
                             </div>
                             <!--end::Notifications-->
-                            <!--begin::Chat-->
-                            <div class="app-navbar-item ms-2 ms-lg-4">
-                                <a href="#" id="kt_drawer_chat_toggle" class="btn btn-custom btn-outline btn-icon btn-icon-gray-700 btn-active-icon-primary" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" data-kt-menu-flip="bottom">
-                                    <!--begin::Svg Icon | path: icons/duotune/communication/com012.svg-->
-                                    <span class="svg-icon svg-icon-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path opacity="0.3" d="M20 3H4C2.89543 3 2 3.89543 2 5V16C2 17.1046 2.89543 18 4 18H4.5C5.05228 18 5.5 18.4477 5.5 19V21.5052C5.5 22.1441 6.21212 22.5253 6.74376 22.1708L11.4885 19.0077C12.4741 18.3506 13.6321 18 14.8167 18H20C21.1046 18 22 17.1046 22 16V5C22 3.89543 21.1046 3 20 3Z" fill="currentColor" />
-                                            <rect x="6" y="12" width="7" height="2" rx="1" fill="currentColor" />
-                                            <rect x="6" y="7" width="12" height="2" rx="1" fill="currentColor" />
-                                        </svg>
-                                    </span>
-                                    <!--end::Svg Icon-->
-                                </a>
-                            </div>
-                            <!--end::Chat-->
+
                             <!--begin::Theme mode-->
                             <div class="app-navbar-item ms-2 ms-lg-4">
                                 <!--begin::Menu toggle-->
                                 <a href="#" class="btn btn-custom btn-outline btn-icon btn-icon-gray-700 btn-active-icon-primary" data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-                                    <i class="fonticon-sun fs-2"></i>
-                                    <i class="fonticon-moon fs-2 d-none"></i>
+                                    <i class="<?= _l('admin.themes.' . ($_SESSION['theme'] ?? 'light'))[0] ?>"></i>
                                 </a>
                                 <!--begin::Menu toggle-->
                                 <!--begin::Menu-->
                                 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-title-gray-700 menu-icon-muted menu-active-bg menu-state-primary fw-bold py-4 fs-6 w-200px" data-kt-menu="true">
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-3 my-1">
-                                        <a href="<?= Route::name('theme-change', ['theme' => 'light']) ?>" class="menu-link px-3 <?= !isset($_SESSION['theme']) ? 'active' : null ?>">
-                                            <span class="menu-icon">
-                                                <i class="fonticon-sun fs-2"></i>
-                                            </span>
-                                            <span class="menu-title">Beyaz</span>
-                                        </a>
-                                    </div>
-                                    <!--end::Menu item-->
-
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-3 my-1">
-                                        <a href="<?= Route::name('theme-change', ['theme' => 'cool']) ?>" class="menu-link px-3 <?= @$_SESSION['theme'] == 'cool' ? 'active' : null ?>">
-                                            <span class="menu-icon">
-                                                <i class="fas fa-eclipse"></i>
-                                            </span>
-                                            <span class="menu-title">Cool</span>
-                                        </a>
-                                    </div>
-                                    <!--end::Menu item-->
-
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-3 my-1">
-                                        <a href="<?= Route::name('theme-change', ['theme' => 'dark']) ?>" class="menu-link px-3 <?= @$_SESSION['theme'] == 'dark' ? 'active' : null ?>">
-                                            <span class="menu-icon">
-                                                <i class="fonticon-moon fs-2"></i>
-                                            </span>
-                                            <span class="menu-title">Siyah</span>
-                                        </a>
-                                    </div>
-                                    <!--end::Menu item-->
+                                    <?php foreach (_l('admin.themes') as $theme => $arr) : ?>
+                                        <div class="menu-item px-3 my-1">
+                                            <a href="<?= Route::name('theme-change', ['theme' => $theme]) ?>" class="menu-link px-3<?= ($theme == @$_SESSION['theme'] || (!isset($_SESSION['theme']) && $theme == 'light')) ? ' active' : null ?>">
+                                                <span class="menu-icon">
+                                                    <i class="<?= $arr[0] ?>"></i>
+                                                </span>
+                                                <span class="menu-title"><?= $arr[1] ?></span>
+                                            </a>
+                                        </div>
+                                    <?php endforeach; ?>
                                 </div>
                                 <!--end::Menu-->
                             </div>
@@ -1540,7 +1504,7 @@ use Core\Route;
                     <!--begin::Logo-->
                     <div class="app-sidebar-logo d-none d-lg-flex flex-stack flex-shrink-0 px-8" id="kt_app_sidebar_logo">
                         <!--begin::Logo image-->
-                        <a href="index-2.html">
+                        <a href="<?= Route::name('admin.home.index') ?>">
                             <img alt="Logo" src="/admin_assets/media/logos/default.svg" class="h-25px" />
                         </a>
                         <!--end::Logo image-->
@@ -1669,7 +1633,7 @@ use Core\Route;
                         <div class="menu menu-column menu-sub-indention fw-bold" id="#kt_sidebar_menu" data-kt-menu="true">
                             <div class="menu-item pt-5">
                                 <div class="menu-content">
-                                    <span class="menu-heading fw-bold text-uppercase fs-7">Ana</span>
+                                    <span class="menu-heading fw-bold text-uppercase fs-7"><?= _l('admin.menu.branches.home') ?></span>
                                 </div>
                             </div>
                             <div class="menu-item">
@@ -1684,13 +1648,13 @@ use Core\Route;
                                             </svg>
                                         </span>
                                     </span>
-                                    <span class="menu-title">Gösterge Paneli</span>
+                                    <span class="menu-title"><?= _l('admin.pages.dashboard.index.title') ?></span>
                                 </a>
                             </div>
 
                             <div class="menu-item pt-5">
                                 <div class="menu-content">
-                                    <span class="menu-heading fw-bold text-uppercase fs-7">İçerik</span>
+                                    <span class="menu-heading fw-bold text-uppercase fs-7"><?= _l('admin.menu.branches.content') ?></span>
                                 </div>
                             </div>
                             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
@@ -1705,7 +1669,7 @@ use Core\Route;
                                         </span>
                                         <!--end::Svg Icon-->
                                     </span>
-                                    <span class="menu-title">Yazılar</span>
+                                    <span class="menu-title"><?= _l('admin.pages.content.index.title') ?></span>
                                     <span class="menu-arrow"></span>
                                 </span>
                                 <div class="menu-sub menu-sub-accordion menu-active-bg" style="display: none; overflow: hidden;" kt-hidden-height="87">
@@ -1714,7 +1678,7 @@ use Core\Route;
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
-                                            <span class="menu-title">Liste</span>
+                                            <span class="menu-title"><?= _l('admin.list') ?></span>
                                         </a>
                                     </div>
                                     <div class="menu-item">
@@ -1722,7 +1686,7 @@ use Core\Route;
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
-                                            <span class="menu-title">Ekle</span>
+                                            <span class="menu-title"><?= _l('admin.add') ?></span>
                                         </a>
                                     </div>
                                 </div>
@@ -1738,7 +1702,7 @@ use Core\Route;
                                             </svg>
                                         </span>
                                     </span>
-                                    <span class="menu-title">Menü</span>
+                                    <span class="menu-title"><?= _l('admin.pages.menu.index.title') ?></span>
                                     <span class="menu-arrow"></span>
                                 </span>
                                 <div class="menu-sub menu-sub-accordion menu-active-bg" style="display: none; overflow: hidden;" kt-hidden-height="87">
@@ -1747,7 +1711,7 @@ use Core\Route;
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
-                                            <span class="menu-title">Liste</span>
+                                            <span class="menu-title"><?= _l('admin.list') ?></span>
                                         </a>
                                     </div>
                                     <div class="menu-item">
@@ -1755,7 +1719,7 @@ use Core\Route;
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
-                                            <span class="menu-title">Ekle</span>
+                                            <span class="menu-title"><?= _l('admin.add') ?></span>
                                         </a>
                                     </div>
                                 </div>
@@ -1763,7 +1727,7 @@ use Core\Route;
 
                             <div class="menu-item pt-5">
                                 <div class="menu-content">
-                                    <span class="menu-heading fw-bold text-uppercase fs-7">Tasarım</span>
+                                    <span class="menu-heading fw-bold text-uppercase fs-7"><?= _l('admin.menu.branches.design') ?></span>
                                 </div>
                             </div>
                             <div class="menu-item">
@@ -1776,7 +1740,7 @@ use Core\Route;
                                             </svg>
                                         </span>
                                     </span>
-                                    <span class="menu-title">Temalar</span>
+                                    <span class="menu-title"><?= _l('admin.menu.themes') ?></span>
                                 </a>
                             </div>
 
@@ -1790,7 +1754,7 @@ use Core\Route;
                                             </svg>
                                         </span>
                                     </span>
-                                    <span class="menu-title">Tema Editörü</span>
+                                    <span class="menu-title"><?= _l('admin.menu.theme-editor') ?></span>
                                 </a>
                             </div>
 
@@ -1805,7 +1769,7 @@ use Core\Route;
                             <div class="me-5">
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-40px cursor-pointer" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" data-kt-menu-overflow="true">
-                                    <img src="user_avatar" alt="Avatar" />
+                                    <img src="<?= Auth::user()['avatar'] ?>" alt="Avatar" />
                                 </div>
                                 <!--end::Symbol-->
                                 <!--begin::User account menu-->
@@ -1815,15 +1779,15 @@ use Core\Route;
                                         <div class="menu-content d-flex align-items-center px-3">
                                             <!--begin::Avatar-->
                                             <div class="symbol symbol-50px me-5">
-                                                <img alt="Avatar" src="user_avatar" />
+                                                <img alt="Avatar" src="<?= Auth::user()['avatar'] ?>" />
                                             </div>
                                             <!--end::Avatar-->
                                             <!--begin::Username-->
                                             <div class="d-flex flex-column">
-                                                <div class="fw-bolder d-flex align-items-center fs-5">Max Smith
+                                                <div class="fw-bolder d-flex align-items-center fs-5">@<?= Auth::user()['username'] ?>
                                                     <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Pro</span>
                                                 </div>
-                                                <a href="#" class="fw-bold text-muted text-hover-primary fs-7">max@kt.com</a>
+                                                <a href="#" class="fw-bold text-muted text-hover-primary fs-7"><?= Auth::user()['email'] ?></a>
                                             </div>
                                             <!--end::Username-->
                                         </div>
@@ -1834,148 +1798,47 @@ use Core\Route;
                                     <!--end::Menu separator-->
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-5">
-                                        <a href="account/overview.html" class="menu-link px-5">My Profile</a>
+                                        <a href="account/overview.html" class="menu-link px-5"><?= _l('admin.my-profile') ?></a>
                                     </div>
                                     <!--end::Menu item-->
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-5">
-                                        <a href="apps/projects/list.html" class="menu-link px-5">
-                                            <span class="menu-text">My Projects</span>
-                                            <span class="menu-badge">
-                                                <span class="badge badge-light-danger badge-circle fw-bolder fs-7">3</span>
-                                            </span>
-                                        </a>
-                                    </div>
-                                    <!--end::Menu item-->
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="right-end">
-                                        <a href="#" class="menu-link px-5">
-                                            <span class="menu-title">My Subscription</span>
-                                            <span class="menu-arrow"></span>
-                                        </a>
-                                        <!--begin::Menu sub-->
-                                        <div class="menu-sub menu-sub-dropdown w-175px py-4">
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="account/referrals.html" class="menu-link px-5">Referrals</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="account/billing.html" class="menu-link px-5">Billing</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="account/statements.html" class="menu-link px-5">Payments</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="account/statements.html" class="menu-link d-flex flex-stack px-5">Statements
-                                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="View your statements"></i></a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu separator-->
-                                            <div class="separator my-2"></div>
-                                            <!--end::Menu separator-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <div class="menu-content px-3">
-                                                    <label class="form-check form-switch form-check-custom form-check-solid">
-                                                        <input class="form-check-input w-30px h-20px" type="checkbox" value="1" checked="checked" name="notifications" />
-                                                        <span class="form-check-label text-muted fs-7">Notifications</span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <!--end::Menu item-->
-                                        </div>
-                                        <!--end::Menu sub-->
-                                    </div>
-                                    <!--end::Menu item-->
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-5">
-                                        <a href="account/statements.html" class="menu-link px-5">My Statements</a>
-                                    </div>
-                                    <!--end::Menu item-->
+
                                     <!--begin::Menu separator-->
                                     <div class="separator my-2"></div>
                                     <!--end::Menu separator-->
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="right-end">
                                         <a href="#" class="menu-link px-5">
-                                            <span class="menu-title position-relative">Language
-                                                <span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">English
-                                                    <img class="w-15px h-15px rounded-1 ms-2" src="/admin_assets/media/flags/united-states.svg" alt="" /></span></span>
+                                            <?= _l('lang.languages') ?>
+                                            <span class="menu-title position-relative">
+                                                <span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">
+                                                    <img class="w-20px h-20px rounded-1" src="/admin_assets/media/flags/<?= Lang::currentLocale() ?>.svg" alt="" />
+                                                </span>
+                                            </span>
                                         </a>
                                         <!--begin::Menu sub-->
                                         <div class="menu-sub menu-sub-dropdown w-175px py-4">
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="account/settings.html" class="menu-link d-flex px-5 active">
-                                                    <span class="symbol symbol-20px me-4">
-                                                        <img class="rounded-1" src="/admin_assets/media/flags/united-states.svg" alt="" />
-                                                    </span>English</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="account/settings.html" class="menu-link d-flex px-5">
-                                                    <span class="symbol symbol-20px me-4">
-                                                        <img class="rounded-1" src="/admin_assets/media/flags/spain.svg" alt="" />
-                                                    </span>Spanish</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="account/settings.html" class="menu-link d-flex px-5">
-                                                    <span class="symbol symbol-20px me-4">
-                                                        <img class="rounded-1" src="/admin_assets/media/flags/germany.svg" alt="" />
-                                                    </span>German</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="account/settings.html" class="menu-link d-flex px-5">
-                                                    <span class="symbol symbol-20px me-4">
-                                                        <img class="rounded-1" src="/admin_assets/media/flags/japan.svg" alt="" />
-                                                    </span>Japanese</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="account/settings.html" class="menu-link d-flex px-5">
-                                                    <span class="symbol symbol-20px me-4">
-                                                        <img class="rounded-1" src="/admin_assets/media/flags/france.svg" alt="" />
-                                                    </span>French</a>
-                                            </div>
-                                            <!--end::Menu item-->
+                                            <?php foreach (Lang::list() as $lang) : ?>
+                                                <div class="menu-item px-3">
+                                                    <a href="<?= Route::name('lang-change', ['lang' => $lang]) ?>" class="text-uppercase menu-link d-flex px-5<?= Lang::currentLocale() == $lang ? ' active' : null ?>">
+                                                        <span class="symbol symbol-20px me-4">
+                                                            <img class="rounded-1" src="/admin_assets/media/flags/<?= $lang ?>.svg" alt="<?= $lang ?>" />
+                                                        </span>
+                                                        <?= $lang ?>
+                                                    </a>
+                                                </div>
+                                            <?php endforeach; ?>
                                         </div>
                                         <!--end::Menu sub-->
                                     </div>
                                     <!--end::Menu item-->
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-5 my-1">
-                                        <a href="account/settings.html" class="menu-link px-5">Account Settings</a>
+                                        <a href="account/settings.html" class="menu-link px-5"><?= _l('admin.account-settings') ?></a>
                                     </div>
                                     <!--end::Menu item-->
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-5">
-                                        <a href="authentication/flows/basic/sign-in.html" class="menu-link px-5">Sign Out</a>
-                                    </div>
-                                    <!--end::Menu item-->
-                                    <!--begin::Menu separator-->
-                                    <div class="separator my-2"></div>
-                                    <!--end::Menu separator-->
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-5">
-                                        <div class="menu-content px-5">
-                                            <label class="form-check form-switch form-check-custom form-check-solid pulse pulse-success" for="kt_user_menu_dark_mode_toggle">
-                                                <input class="form-check-input w-30px h-20px" type="checkbox" value="1" name="mode" id="kt_user_menu_dark_mode_toggle" data-kt-url="dark/index.html" />
-                                                <span class="pulse-ring ms-n1"></span>
-                                                <span class="form-check-label text-gray-600 fs-7">Dark Mode</span>
-                                            </label>
-                                        </div>
+                                        <a href="<?= Route::name('admin.logout') ?>" class="menu-link px-5"><?= _l('admin.logout') ?></a>
                                     </div>
                                     <!--end::Menu item-->
                                 </div>
@@ -1985,17 +1848,17 @@ use Core\Route;
                             <!--begin::Info-->
                             <div class="me-2">
                                 <!--begin::Username-->
-                                <a href="javascript:;" class="app-sidebar-username text-gray-800 text-hover-primary fs-6 fw-bold lh-0">Mustafa Ömer ESER</a>
+                                <a href="javascript:;" class="app-sidebar-username text-gray-800 text-hover-primary fs-6 fw-bold lh-0">@<?= Auth::user()['username'] ?></a>
                                 <!--end::Username-->
                                 <!--begin::Description-->
-                                <span class="app-sidebar-deckription text-gray-400 fw-bold d-block fs-8">Administrator</span>
+                                <span class="app-sidebar-deckription text-gray-400 fw-bold d-block fs-8"><?= Auth::user()['email'] ?></span>
                                 <!--end::Description-->
                             </div>
                             <!--end::Info-->
                         </div>
                         <!--end::User avatar-->
                         <!--begin::Action-->
-                        <a href="authentication/sign-in/basic.html" class="btn btn-icon btn-active-color-primary btn-icon-custom-color me-n4" data-bs-toggle="tooltip" title="End session and signout">
+                        <a href="<?= Route::name('admin.logout') ?>" class="btn btn-icon btn-active-color-primary btn-icon-custom-color me-n4" data-bs-toggle="tooltip" title="<?= _l('admin.logout') ?>">
                             <!--begin::Svg Icon | path: icons/duotune/arrows/arr076.svg-->
                             <span class="svg-icon svg-icon-2 svg-icon-gray-400">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -2115,7 +1978,7 @@ use Core\Route;
                                         <!--end::Info-->
                                         <!--begin::User-->
                                         <div class="symbol symbol-circle symbol-25px" data-bs-toggle="tooltip" data-bs-boundary="window" data-bs-placement="top" title="Nina Nilson">
-                                            <img src="/admin_assets/media/avatars/300-14.jpg" alt="img" />
+                                            <img src="<?= Auth::user()['avatar'] ?>" alt="img" />
                                         </div>
                                         <!--end::User-->
                                     </div>
@@ -2678,377 +2541,6 @@ use Core\Route;
         </div>
     </div>
     <!--end::Activities drawer-->
-    <!--begin::Chat drawer-->
-    <div id="kt_drawer_chat" class="bg-body" data-kt-drawer="true" data-kt-drawer-name="chat" data-kt-drawer-activate="true" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'300px', 'md': '500px'}" data-kt-drawer-direction="end" data-kt-drawer-toggle="#kt_drawer_chat_toggle" data-kt-drawer-close="#kt_drawer_chat_close">
-        <!--begin::Messenger-->
-        <div class="card w-100 rounded-0 border-0" id="kt_drawer_chat_messenger">
-            <!--begin::Card header-->
-            <div class="card-header pe-5" id="kt_drawer_chat_messenger_header">
-                <!--begin::Title-->
-                <div class="card-title">
-                    <!--begin::User-->
-                    <div class="d-flex justify-content-center flex-column me-3">
-                        <a href="#" class="fs-4 fw-bolder text-gray-900 text-hover-primary me-1 mb-2 lh-1">Brian Cox</a>
-                        <!--begin::Info-->
-                        <div class="mb-0 lh-1">
-                            <span class="badge badge-success badge-circle w-10px h-10px me-1"></span>
-                            <span class="fs-7 fw-bold text-muted">Active</span>
-                        </div>
-                        <!--end::Info-->
-                    </div>
-                    <!--end::User-->
-                </div>
-                <!--end::Title-->
-                <!--begin::Card toolbar-->
-                <div class="card-toolbar">
-                    <!--begin::Menu-->
-                    <div class="me-2">
-                        <button class="btn btn-sm btn-icon btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                            <i class="bi bi-three-dots fs-3"></i>
-                        </button>
-                        <!--begin::Menu 3-->
-                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px py-3" data-kt-menu="true">
-                            <!--begin::Heading-->
-                            <div class="menu-item px-3">
-                                <div class="menu-content text-muted pb-2 px-3 fs-7 text-uppercase">Contacts</div>
-                            </div>
-                            <!--end::Heading-->
-                            <!--begin::Menu item-->
-                            <div class="menu-item px-3">
-                                <a href="#" class="menu-link px-3" data-bs-toggle="modal" data-bs-target="#kt_modal_users_search">Add Contact</a>
-                            </div>
-                            <!--end::Menu item-->
-                            <!--begin::Menu item-->
-                            <div class="menu-item px-3">
-                                <a href="#" class="menu-link flex-stack px-3" data-bs-toggle="modal" data-bs-target="#kt_modal_invite_friends">Invite Contacts
-                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a contact email to send an invitation"></i></a>
-                            </div>
-                            <!--end::Menu item-->
-                            <!--begin::Menu item-->
-                            <div class="menu-item px-3" data-kt-menu-trigger="hover" data-kt-menu-placement="right-start">
-                                <a href="#" class="menu-link px-3">
-                                    <span class="menu-title">Groups</span>
-                                    <span class="menu-arrow"></span>
-                                </a>
-                                <!--begin::Menu sub-->
-                                <div class="menu-sub menu-sub-dropdown w-175px py-4">
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-3">
-                                        <a href="#" class="menu-link px-3" data-bs-toggle="tooltip" title="Coming soon">Create Group</a>
-                                    </div>
-                                    <!--end::Menu item-->
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-3">
-                                        <a href="#" class="menu-link px-3" data-bs-toggle="tooltip" title="Coming soon">Invite Members</a>
-                                    </div>
-                                    <!--end::Menu item-->
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-3">
-                                        <a href="#" class="menu-link px-3" data-bs-toggle="tooltip" title="Coming soon">Settings</a>
-                                    </div>
-                                    <!--end::Menu item-->
-                                </div>
-                                <!--end::Menu sub-->
-                            </div>
-                            <!--end::Menu item-->
-                            <!--begin::Menu item-->
-                            <div class="menu-item px-3 my-1">
-                                <a href="#" class="menu-link px-3" data-bs-toggle="tooltip" title="Coming soon">Settings</a>
-                            </div>
-                            <!--end::Menu item-->
-                        </div>
-                        <!--end::Menu 3-->
-                    </div>
-                    <!--end::Menu-->
-                    <!--begin::Close-->
-                    <div class="btn btn-sm btn-icon btn-active-light-primary" id="kt_drawer_chat_close">
-                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </div>
-                    <!--end::Close-->
-                </div>
-                <!--end::Card toolbar-->
-            </div>
-            <!--end::Card header-->
-            <!--begin::Card body-->
-            <div class="card-body" id="kt_drawer_chat_messenger_body">
-                <!--begin::Messages-->
-                <div class="scroll-y me-n5 pe-5" data-kt-element="messages" data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_drawer_chat_messenger_header, #kt_drawer_chat_messenger_footer" data-kt-scroll-wrappers="#kt_drawer_chat_messenger_body" data-kt-scroll-offset="0px">
-                    <!--begin::Message(in)-->
-                    <div class="d-flex justify-content-start mb-10">
-                        <!--begin::Wrapper-->
-                        <div class="d-flex flex-column align-items-start">
-                            <!--begin::User-->
-                            <div class="d-flex align-items-center mb-2">
-                                <!--begin::Avatar-->
-                                <div class="symbol symbol-35px symbol-circle">
-                                    <img alt="Pic" src="/admin_assets/media/avatars/300-25.jpg" />
-                                </div>
-                                <!--end::Avatar-->
-                                <!--begin::Details-->
-                                <div class="ms-3">
-                                    <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary me-1">Brian Cox</a>
-                                    <span class="text-muted fs-7 mb-1">2 mins</span>
-                                </div>
-                                <!--end::Details-->
-                            </div>
-                            <!--end::User-->
-                            <!--begin::Text-->
-                            <div class="p-5 rounded bg-light-info text-dark fw-bold mw-lg-400px text-start" data-kt-element="message-text">How likely are you to recommend our company to your friends and family ?</div>
-                            <!--end::Text-->
-                        </div>
-                        <!--end::Wrapper-->
-                    </div>
-                    <!--end::Message(in)-->
-                    <!--begin::Message(out)-->
-                    <div class="d-flex justify-content-end mb-10">
-                        <!--begin::Wrapper-->
-                        <div class="d-flex flex-column align-items-end">
-                            <!--begin::User-->
-                            <div class="d-flex align-items-center mb-2">
-                                <!--begin::Details-->
-                                <div class="me-3">
-                                    <span class="text-muted fs-7 mb-1">5 mins</span>
-                                    <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary ms-1">You</a>
-                                </div>
-                                <!--end::Details-->
-                                <!--begin::Avatar-->
-                                <div class="symbol symbol-35px symbol-circle">
-                                    <img alt="Pic" src="/admin_assets/media/avatars/300-1.jpg" />
-                                </div>
-                                <!--end::Avatar-->
-                            </div>
-                            <!--end::User-->
-                            <!--begin::Text-->
-                            <div class="p-5 rounded bg-light-primary text-dark fw-bold mw-lg-400px text-end" data-kt-element="message-text">Hey there, we’re just writing to let you know that you’ve been subscribed to a repository on GitHub.</div>
-                            <!--end::Text-->
-                        </div>
-                        <!--end::Wrapper-->
-                    </div>
-                    <!--end::Message(out)-->
-                    <!--begin::Message(in)-->
-                    <div class="d-flex justify-content-start mb-10">
-                        <!--begin::Wrapper-->
-                        <div class="d-flex flex-column align-items-start">
-                            <!--begin::User-->
-                            <div class="d-flex align-items-center mb-2">
-                                <!--begin::Avatar-->
-                                <div class="symbol symbol-35px symbol-circle">
-                                    <img alt="Pic" src="/admin_assets/media/avatars/300-25.jpg" />
-                                </div>
-                                <!--end::Avatar-->
-                                <!--begin::Details-->
-                                <div class="ms-3">
-                                    <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary me-1">Brian Cox</a>
-                                    <span class="text-muted fs-7 mb-1">1 Hour</span>
-                                </div>
-                                <!--end::Details-->
-                            </div>
-                            <!--end::User-->
-                            <!--begin::Text-->
-                            <div class="p-5 rounded bg-light-info text-dark fw-bold mw-lg-400px text-start" data-kt-element="message-text">Ok, Understood!</div>
-                            <!--end::Text-->
-                        </div>
-                        <!--end::Wrapper-->
-                    </div>
-                    <!--end::Message(in)-->
-                    <!--begin::Message(out)-->
-                    <div class="d-flex justify-content-end mb-10">
-                        <!--begin::Wrapper-->
-                        <div class="d-flex flex-column align-items-end">
-                            <!--begin::User-->
-                            <div class="d-flex align-items-center mb-2">
-                                <!--begin::Details-->
-                                <div class="me-3">
-                                    <span class="text-muted fs-7 mb-1">2 Hours</span>
-                                    <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary ms-1">You</a>
-                                </div>
-                                <!--end::Details-->
-                                <!--begin::Avatar-->
-                                <div class="symbol symbol-35px symbol-circle">
-                                    <img alt="Pic" src="/admin_assets/media/avatars/300-1.jpg" />
-                                </div>
-                                <!--end::Avatar-->
-                            </div>
-                            <!--end::User-->
-                            <!--begin::Text-->
-                            <div class="p-5 rounded bg-light-primary text-dark fw-bold mw-lg-400px text-end" data-kt-element="message-text">You’ll receive notifications for all issues, pull requests!</div>
-                            <!--end::Text-->
-                        </div>
-                        <!--end::Wrapper-->
-                    </div>
-                    <!--end::Message(out)-->
-                    <!--begin::Message(in)-->
-                    <div class="d-flex justify-content-start mb-10">
-                        <!--begin::Wrapper-->
-                        <div class="d-flex flex-column align-items-start">
-                            <!--begin::User-->
-                            <div class="d-flex align-items-center mb-2">
-                                <!--begin::Avatar-->
-                                <div class="symbol symbol-35px symbol-circle">
-                                    <img alt="Pic" src="/admin_assets/media/avatars/300-25.jpg" />
-                                </div>
-                                <!--end::Avatar-->
-                                <!--begin::Details-->
-                                <div class="ms-3">
-                                    <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary me-1">Brian Cox</a>
-                                    <span class="text-muted fs-7 mb-1">3 Hours</span>
-                                </div>
-                                <!--end::Details-->
-                            </div>
-                            <!--end::User-->
-                            <!--begin::Text-->
-                            <div class="p-5 rounded bg-light-info text-dark fw-bold mw-lg-400px text-start" data-kt-element="message-text">You can unwatch this repository immediately by clicking here:
-                                <a href="https://keenthemes.com/">Keenthemes.com</a>
-                            </div>
-                            <!--end::Text-->
-                        </div>
-                        <!--end::Wrapper-->
-                    </div>
-                    <!--end::Message(in)-->
-                    <!--begin::Message(out)-->
-                    <div class="d-flex justify-content-end mb-10">
-                        <!--begin::Wrapper-->
-                        <div class="d-flex flex-column align-items-end">
-                            <!--begin::User-->
-                            <div class="d-flex align-items-center mb-2">
-                                <!--begin::Details-->
-                                <div class="me-3">
-                                    <span class="text-muted fs-7 mb-1">4 Hours</span>
-                                    <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary ms-1">You</a>
-                                </div>
-                                <!--end::Details-->
-                                <!--begin::Avatar-->
-                                <div class="symbol symbol-35px symbol-circle">
-                                    <img alt="Pic" src="/admin_assets/media/avatars/300-1.jpg" />
-                                </div>
-                                <!--end::Avatar-->
-                            </div>
-                            <!--end::User-->
-                            <!--begin::Text-->
-                            <div class="p-5 rounded bg-light-primary text-dark fw-bold mw-lg-400px text-end" data-kt-element="message-text">Most purchased Business courses during this sale!</div>
-                            <!--end::Text-->
-                        </div>
-                        <!--end::Wrapper-->
-                    </div>
-                    <!--end::Message(out)-->
-                    <!--begin::Message(in)-->
-                    <div class="d-flex justify-content-start mb-10">
-                        <!--begin::Wrapper-->
-                        <div class="d-flex flex-column align-items-start">
-                            <!--begin::User-->
-                            <div class="d-flex align-items-center mb-2">
-                                <!--begin::Avatar-->
-                                <div class="symbol symbol-35px symbol-circle">
-                                    <img alt="Pic" src="/admin_assets/media/avatars/300-25.jpg" />
-                                </div>
-                                <!--end::Avatar-->
-                                <!--begin::Details-->
-                                <div class="ms-3">
-                                    <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary me-1">Brian Cox</a>
-                                    <span class="text-muted fs-7 mb-1">5 Hours</span>
-                                </div>
-                                <!--end::Details-->
-                            </div>
-                            <!--end::User-->
-                            <!--begin::Text-->
-                            <div class="p-5 rounded bg-light-info text-dark fw-bold mw-lg-400px text-start" data-kt-element="message-text">Company BBQ to celebrate the last quater achievements and goals. Food and drinks provided</div>
-                            <!--end::Text-->
-                        </div>
-                        <!--end::Wrapper-->
-                    </div>
-                    <!--end::Message(in)-->
-                    <!--begin::Message(template for out)-->
-                    <div class="d-flex justify-content-end mb-10 d-none" data-kt-element="template-out">
-                        <!--begin::Wrapper-->
-                        <div class="d-flex flex-column align-items-end">
-                            <!--begin::User-->
-                            <div class="d-flex align-items-center mb-2">
-                                <!--begin::Details-->
-                                <div class="me-3">
-                                    <span class="text-muted fs-7 mb-1">Just now</span>
-                                    <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary ms-1">You</a>
-                                </div>
-                                <!--end::Details-->
-                                <!--begin::Avatar-->
-                                <div class="symbol symbol-35px symbol-circle">
-                                    <img alt="Pic" src="/admin_assets/media/avatars/300-1.jpg" />
-                                </div>
-                                <!--end::Avatar-->
-                            </div>
-                            <!--end::User-->
-                            <!--begin::Text-->
-                            <div class="p-5 rounded bg-light-primary text-dark fw-bold mw-lg-400px text-end" data-kt-element="message-text"></div>
-                            <!--end::Text-->
-                        </div>
-                        <!--end::Wrapper-->
-                    </div>
-                    <!--end::Message(template for out)-->
-                    <!--begin::Message(template for in)-->
-                    <div class="d-flex justify-content-start mb-10 d-none" data-kt-element="template-in">
-                        <!--begin::Wrapper-->
-                        <div class="d-flex flex-column align-items-start">
-                            <!--begin::User-->
-                            <div class="d-flex align-items-center mb-2">
-                                <!--begin::Avatar-->
-                                <div class="symbol symbol-35px symbol-circle">
-                                    <img alt="Pic" src="/admin_assets/media/avatars/300-25.jpg" />
-                                </div>
-                                <!--end::Avatar-->
-                                <!--begin::Details-->
-                                <div class="ms-3">
-                                    <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary me-1">Brian Cox</a>
-                                    <span class="text-muted fs-7 mb-1">Just now</span>
-                                </div>
-                                <!--end::Details-->
-                            </div>
-                            <!--end::User-->
-                            <!--begin::Text-->
-                            <div class="p-5 rounded bg-light-info text-dark fw-bold mw-lg-400px text-start" data-kt-element="message-text">Right before vacation season we have the next Big Deal for you.</div>
-                            <!--end::Text-->
-                        </div>
-                        <!--end::Wrapper-->
-                    </div>
-                    <!--end::Message(template for in)-->
-                </div>
-                <!--end::Messages-->
-            </div>
-            <!--end::Card body-->
-            <!--begin::Card footer-->
-            <div class="card-footer pt-4" id="kt_drawer_chat_messenger_footer">
-                <!--begin::Input-->
-                <textarea class="form-control form-control-flush mb-3" rows="1" data-kt-element="input" placeholder="Type a message"></textarea>
-                <!--end::Input-->
-                <!--begin:Toolbar-->
-                <div class="d-flex flex-stack">
-                    <!--begin::Actions-->
-                    <div class="d-flex align-items-center me-2">
-                        <button class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button" data-bs-toggle="tooltip" title="Coming soon">
-                            <i class="bi bi-paperclip fs-3"></i>
-                        </button>
-                        <button class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button" data-bs-toggle="tooltip" title="Coming soon">
-                            <i class="bi bi-upload fs-3"></i>
-                        </button>
-                    </div>
-                    <!--end::Actions-->
-                    <!--begin::Send-->
-                    <button class="btn btn-primary" type="button" data-kt-element="send">Send</button>
-                    <!--end::Send-->
-                </div>
-                <!--end::Toolbar-->
-            </div>
-            <!--end::Card footer-->
-        </div>
-        <!--end::Messenger-->
-    </div>
-    <!--end::Chat drawer-->
-    <!--end::Drawers-->
 
     <!--begin::Scrolltop-->
     <div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
@@ -3067,7 +2559,7 @@ use Core\Route;
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Bu işlemi yapmak istediğinize emin misiniz?</h5>
+                    <h5 class="modal-title"><?= _l('admin.ask-modal.title') ?></h5>
 
                     <!--begin::Close-->
                     <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
@@ -3077,12 +2569,12 @@ use Core\Route;
                 </div>
 
                 <div class="modal-body">
-                    <p>Bu işlem geri alınamaz, veya düzeltilemez. Bu işleme devam etmek istediğinizden emin misiniz?</p>
+                    <p><?= _l('admin.ask-modal.text') ?></p>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-active-light-warning" data-bs-dismiss="modal">Vazgeç</button>
-                    <button type="button" class="btn btn-active-light-danger" accept-button>Evet</button>
+                    <button type="button" class="btn btn-active-light-warning" data-bs-dismiss="modal"><?= _l('admin.ask-modal.decline') ?></button>
+                    <button type="button" class="btn btn-active-light-danger" accept-button><?= _l('admin.ask-modal.accept') ?></button>
                 </div>
             </div>
         </div>

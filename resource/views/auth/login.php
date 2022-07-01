@@ -20,7 +20,7 @@
                     <label class="form-label fs-6 fw-bolder text-dark">E-mail</label>
                     <!--end::Label-->
                     <!--begin::Input-->
-                    <input class="form-control form-control-lg form-control-solid" type="email" name="email" autocomplete="off" placeholder="E-mail adresiniz" required />
+                    <input class="form-control form-control-lg form-control-solid" type="email" name="email" autocomplete="off" placeholder="E-mail adresiniz" autofocus required />
                     <!--end::Input-->
                 </div>
                 <!--end::Input group-->

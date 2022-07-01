@@ -7,7 +7,7 @@ use Core\Route;
 Route::any('/langchange/{lang}', function ($lang) {
     $lang = Lang::locale($lang);
     if (Http::isAjax()) return $lang;
-    return redirect('/');
+    return back();
 }, [
     'name' => 'lang-change'
 ]);

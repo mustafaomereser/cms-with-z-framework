@@ -13,6 +13,6 @@ class HomeController
 
     public function index()
     {
-        return view('home.index', [], 'main');
+        return view('home.index', ['title' => _l('admin.pages.dashboard.index.title')], 'main');
     }
 }

@@ -30,8 +30,8 @@ $code = htmlspecialchars(file_get_contents($file));
                 </div>
                 <div class="float-end">
                     <button class="btn btn-primary save-button">
-                        <span class="indicator-label">Kaydet</span>
-                        <span class="indicator-progress">Lütfen bekleyin...
+                        <span class="indicator-label"><?= _l('admin.save') ?></span>
+                        <span class="indicator-progress"><?= _l('admin.please-wait') ?>
                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                         </span>
                     </button>
@@ -44,8 +44,8 @@ $code = htmlspecialchars(file_get_contents($file));
             </div>
             <div class="mt-3 text-end">
                 <button class="btn btn-primary save-button">
-                    <span class="indicator-label">Kaydet</span>
-                    <span class="indicator-progress">Lütfen bekleyin...
+                    <span class="indicator-label"><?= _l('admin.save') ?></span>
+                    <span class="indicator-progress"><?= _l('admin.please-wait') ?>
                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                     </span>
                 </button>

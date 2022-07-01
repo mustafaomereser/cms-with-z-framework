@@ -7449,8 +7449,10 @@ const csrf = $('[name="CSRF-X-TOKEN"]').attr('content'),
 
 $(() => {
     let url = document.URL.split('?')[0].split('#')[0];
-    $(`[href="${url}"]`).addClass('active');
-    $('.menu-link.active').parent().parent().parent().find('.menu-link').click();
+    if ($(`.menu-accordion [href="${url}"]`).length) {
+        $(`[href="${url}"]`).addClass('active');
+        $('.menu-link.active').parent().parent().parent().find('.menu-link').click();
+    }
 
     $.selectData = (trigger = true) => $('[data-select]').each(function (index, item) {
         let is = $(item);
@@ -7458,7 +7460,6 @@ $(() => {
         if (trigger) is.trigger('change');
     });
     $.selectData(true);
-
 
     $.showAlerts = (list) => {
         for (let index of Object.keys(list)) toastr[list[index][0]](list[index][1]);

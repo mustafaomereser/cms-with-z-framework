@@ -14,19 +14,19 @@ use Core\Route;
     <?= csrf() ?>
     <div class="mb-10">
         <div class="m-0 p-0 mb-10 clearfix">
-            <a class="btn btn-light btn-active-light-primary float-start" href="<?= Route::name('admin.content.index') ?>"><i class="fa fa-angle-left"></i> Listeye dön</a>
+            <a class="btn btn-light btn-active-light-primary float-start" href="<?= Route::name('admin.content.index') ?>"><i class="fa fa-angle-left"></i> <?= _l('admin.back-to-list') ?></a>
             <?php if (@$content->id) : ?>
-                <a class="btn btn-light btn-active-light-primary float-end" href="<?= Route::name($content->slug[Lang::currentLocale()]) ?>" target="_blank">Sayfaya git <i class="ms-2 fa fa-angle-right"></i></a>
+                <a class="btn btn-light btn-active-light-primary float-end" href="<?= Route::name($content->slug[Lang::currentLocale()]) ?>" target="_blank"><?= _l('admin.go-to-page') ?> <i class="ms-2 fa fa-angle-right"></i></a>
             <?php endif; ?>
         </div>
         <?php if (!@$content->id) : ?>
-            <h4 class="fs-1 text-gray-800 w-bolder mb-6">Yazı Ekle</h4>
-            <p class="fw-bold fs-4 text-gray-600 mb-2">Sitenizin içeriğini doldurmak için burada yazılar oluşturabilirsiniz, aklında ne varsa yazmaya başlayabilirsin.</p>
+            <h4 class="fs-1 text-gray-800 w-bolder mb-6"><?= _l('admin.pages.content.editOrcreate.create-title') ?></h4>
+            <p class="fw-bold fs-4 text-gray-600 mb-2"><?= _l('admin.pages.content.editOrcreate.create-description') ?></p>
         <?php else : ?>
             <input type="hidden" name="id" value="<?= $content->id ?>" required>
             <?= inputMethod('PATCH') ?>
-            <h4 class="fs-1 text-gray-800 w-bolder mb-6">Yazı Düzenle</h4>
-            <p class="fw-bold fs-4 text-gray-600 mb-2">Önceden yazdığınız yazıları burada tekrar düzenleyebilirsiniz.</p>
+            <h4 class="fs-1 text-gray-800 w-bolder mb-6"><?= _l('admin.pages.content.editOrcreate.edit-title') ?></h4>
+            <p class="fw-bold fs-4 text-gray-600 mb-2"><?= _l('admin.pages.content.editOrcreate.edit-description') ?></p>
         <?php endif; ?>
     </div>
 
@@ -37,7 +37,7 @@ use Core\Route;
                     <ul class="nav nav-tabs flex-nowrap text-nowrap">
                         <?php foreach (Lang::list() as $key => $lang) : ?>
                             <li class="nav-item">
-                                <a class="nav-link btn btn-active-light btn-color-gray-600 btn-active-color-primary rounded-bottom-0 text-uppercase <?= $key != 0 ?: 'active' ?>" data-bs-toggle="tab" href="#title-<?= $lang ?>"><?= $lang ?></a>
+                                <a class="nav-link btn btn-active-light btn-color-gray-600 btn-active-color-primary rounded-bottom-0 text-uppercase<?= $lang == Lang::currentLocale() ? ' active' : null ?>" data-bs-toggle="tab" href="#title-<?= $lang ?>"><?= $lang ?></a>
                             </li>
                         <?php endforeach; ?>
                     </ul>
@@ -45,15 +45,15 @@ use Core\Route;
 
                 <div class="tab-content">
                     <?php foreach (Lang::list() as $key => $lang) : ?>
-                        <div class="tab-pane fade<?= $key != 0 ?: ' show active' ?>" id="title-<?= $lang ?>" role="tabpanel">
+                        <div class="tab-pane fade<?= $lang == Lang::currentLocale() ? ' show active' : null ?>" id="title-<?= $lang ?>" role="tabpanel">
                             <div class="row">
                                 <div class="col-md-6 fv-row fv-plugins-icon-container">
-                                    <label class="fs-5 fw-bold mb-2">Başlık</label>
-                                    <input type="text" class="form-control" placeholder="Yazınızın Başlığı" name="title[<?= $lang ?>]" value="<?= @$content->title[$lang] ?>">
+                                    <label class="fs-5 fw-bold mb-2"><?= _l('admin.pages.content.index.th-title') ?></label>
+                                    <input type="text" class="form-control" placeholder="<?= _l('admin.pages.content.index.th-title') ?>" name="title[<?= $lang ?>]" value="<?= @$content->title[$lang] ?>">
                                 </div>
                                 <div class="col-md-6 fv-row fv-plugins-icon-container">
-                                    <label class="fs-5 fw-bold mb-2">Yazının URL'i</label>
-                                    <input type="text" class="form-control" placeholder="Yazınızın URL yolu" name="slug[<?= $lang ?>]" value="<?= @$content->slug[$lang] ?>">
+                                    <label class="fs-5 fw-bold mb-2"><?= _l('admin.pages.content.index.th-seo') ?></label>
+                                    <input type="text" class="form-control" placeholder="<?= _l('admin.pages.content.index.th-seo') ?>" name="slug[<?= $lang ?>]" value="<?= @$content->slug[$lang] ?>">
                                 </div>
                             </div>
                         </div>
@@ -63,10 +63,10 @@ use Core\Route;
 
             <div class="d-flex flex-column mb-5 fv-row">
                 <label class="d-flex align-items-center fs-5 fw-bold mb-2">
-                    <span>Sayfa tipi</span>
+                    <span><?= _l('admin.pages.content.index.th-type') ?></span>
                 </label>
 
-                <select name="type" data-control="select2" data-placeholder="Tip Seçiniz..." class="form-select" data-select="<?= @$content->type ?>">
+                <select name="type" data-control="select2" data-placeholder="<?= _l('admin.pages.content.index.th-type') ?>" class="form-select" data-select="<?= @$content->type ?>">
                     <?php foreach (App\Helpers\Theme::contentTypes() as $type) : ?>
                         <option value="<?= $type ?>"><?= $type ?></option>
                     <?php endforeach; ?>
@@ -79,14 +79,14 @@ use Core\Route;
                     <ul class="nav nav-tabs flex-nowrap text-nowrap">
                         <?php foreach (Lang::list() as $key => $lang) : ?>
                             <li class="nav-item">
-                                <a class="nav-link btn btn-active-light btn-color-gray-600 btn-active-color-primary rounded-bottom-0 text-uppercase <?= $key != 0 ?: 'active' ?>" data-bs-toggle="tab" href="#content-<?= $lang ?>"><?= $lang ?></a>
+                                <a class="nav-link btn btn-active-light btn-color-gray-600 btn-active-color-primary rounded-bottom-0 text-uppercase<?= $lang == Lang::currentLocale() ? ' active' : null ?>" data-bs-toggle="tab" href="#content-<?= $lang ?>"><?= $lang ?></a>
                             </li>
                         <?php endforeach; ?>
                     </ul>
                 </div>
                 <div class="tab-content">
                     <?php foreach (Lang::list() as $key => $lang) : ?>
-                        <div class="tab-pane fade<?= $key != 0 ?: ' show active' ?>" id="content-<?= $lang ?>" role="tabpanel">
+                        <div class="tab-pane fade<?= $lang == Lang::currentLocale() ? ' show active' : null ?>" id="content-<?= $lang ?>" role="tabpanel">
                             <div class="mb-5">
                                 <div class="fv-row fv-plugins-icon-container">
                                     <label class="fs-5 fw-bold mb-2">Yazı</label>
@@ -101,7 +101,7 @@ use Core\Route;
         <div class="col-4 ps-10">
             <div class="mb-5 fv-row">
                 <label class="d-flex align-items-center fs-5 fw-bold mb-2">
-                    <span>Galeri Medyaları</span>
+                    <span><?= _l('admin.pages.content.editOrcreate.medias') ?></span>
                 </label>
 
                 <input type="file" name="gallery[]" id="gallery" class="form-control" accept="image/*" multiple>
@@ -115,7 +115,7 @@ use Core\Route;
 
             <div class="d-flex flex-column mb-5 fv-row">
                 <label class="d-flex align-items-center fs-5 fw-bold mb-2">
-                    <span>Paylaşma Durumu</span>
+                    <span><?= _l('admin.pages.content.editOrcreate.share-status') ?></span>
                 </label>
 
                 <select name="status" data-control="select2" class="form-select" data-select="<?= @$content->status ?>">
@@ -125,7 +125,7 @@ use Core\Route;
                 </select>
             </div>
             <div class="mb-5 text-end">
-                <button class="btn btn-primary btn-sm">Kaydet</button>
+                <button class="btn btn-primary btn-sm"><?= _l('admin.save') ?></button>
             </div>
         </div>
     </div>
@@ -134,7 +134,7 @@ use Core\Route;
 <script src="/admin_assets/js/custom/documentation/editors/tinymce/basic.js" defer></script>
 <script>
     $(() => {
-        tinymce.init({
+        let options = {
             selector: ".content",
             menubar: false,
             toolbar: ["styleselect fontselect fontsizeselect",
@@ -142,6 +142,12 @@ use Core\Route;
                 "bullist numlist | outdent indent | blockquote subscript superscript | advlist | autolink | lists charmap | print preview |  code"
             ],
             plugins: "advlist autolink link image lists charmap print preview code"
-        });
+        };
+
+        if (<?= @$_SESSION['theme'] == 'dark' ? 'true' : 'false' ?>) {
+            options["skin"] = "oxide-dark";
+            options["content_css"] = "dark";
+        }
+        tinymce.init(options);
     });
 </script>

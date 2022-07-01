@@ -25,7 +25,7 @@ class MenuController
      */
     public function index()
     {
-        return view('menu.index', ['title' => 'Menüler'], 'main');
+        return view('menu.index', ['title' => _l('admin.pages.menu.index.title')], 'main');
     }
 
     /** Show page | GET: /id
@@ -54,14 +54,14 @@ class MenuController
                     $titles = json_decode($content->title, true);
                     $slug = json_decode($content->slug, true)[Lang::currentLocale()];
 
-                    $content = "<a href='" . Route::name($slug) . "' class='btn btn-light btn-active-light-primary btn-sm w-100 mb-3' target='_blank'>Yazıya Git</a>";
+                    $content = "<a href='" . Route::name($slug) . "' class='btn btn-light btn-active-light-primary btn-sm w-100 mb-3' target='_blank'>" . _l('admin.go-to-content') . "</a>";
                     foreach ($titles as $lang => $title) $content .= "<div><b class='text-uppercase'>$lang:</b> `$title`</div>";
 
                     $data['data'][] = [
                         '<a href="' . Route::name('admin.menu.edit', ['id' => $menu->id]) . '" class="btn btn-light btn-sm btn-active-light-primary"><i class="fa fa-pen-fancy"></i></a>',
                         $menu->id,
                         $menu->name,
-                        $parent ?? '<b>Yok</b>',
+                        $parent ?? '<b>' . _l('admin.none') . '</b>',
                         $content,
                         '<button class="btn btn-light btn-sm btn-sm btn-active-light-danger" data-menu-id="' . $menu->id . '" onwaiting="$.menu($(this).attr(`data-menu-id`)).delete(deleteMenuCallback);" onclick="$.askModal(this);"><i class="fa fa-trash"></i></button>',
                     ];
@@ -70,7 +70,7 @@ class MenuController
                 break;
 
             default:
-                abort(400, 'Böyle bir seçenek yok.');
+                abort(400, _l('admin.here-is-none-option'));
         }
     }
 
@@ -79,7 +79,7 @@ class MenuController
      */
     public function create()
     {
-        return view('menu.editOrCreate', ['title' => 'Menü Oluştur', 'menus' => $this->menus->get(true), 'contents' => $this->contents->public()], 'main');
+        return view('menu.editOrCreate', ['title' => _l('admin.pages.menu.editOrcreate.create-title'), 'menus' => $this->menus->get(true), 'contents' => $this->contents->public()], 'main');
     }
 
     /** Edit page | GET: /id/edit
@@ -88,7 +88,7 @@ class MenuController
      */
     public function edit($id)
     {
-        return view('menu.editOrCreate', ['title' => 'Menü Düzenle', 'menus' => $this->menus->get(true), 'menu' => $this->menus->find($id, true), 'contents' => $this->contents->public()], 'main');
+        return view('menu.editOrCreate', ['title' => _l('admin.pages.menu.editOrcreate.edit-title'), 'menus' => $this->menus->get(true), 'menu' => $this->menus->find($id, true), 'contents' => $this->contents->public()], 'main');
     }
 
 
@@ -114,11 +114,11 @@ class MenuController
         $menu = $this->menus->insert($validated);
 
         if (isset($menu['id'])) {
-            Alerts::success('Menü başarıyla eklendi!');
+            Alerts::success(_l('admin.pages.menu.messages.added'));
             return redirect(Route::name('admin.menu.edit', ['id' => $menu['id']]));
         }
 
-        Alerts::danger('Menü eklenemedi.');
+        Alerts::danger(_l('admin.pages.menu.messages.add-fail'));
         return back();
     }
 
@@ -130,8 +130,8 @@ class MenuController
         $validated = $this->setAll();
         $menu = $this->menus->where('id', '=', $id)->update($validated);
 
-        if ($menu) Alerts::success('Menü başarıyla güncellendi!');
-        else Alerts::danger('Menü güncellenemedi.');
+        if ($menu) Alerts::success(_l('admin.pages.menu.messages.updated'));
+        else Alerts::danger(_l('admin.pages.menu.messages.update-fail'));
 
         return back();
     }
@@ -142,8 +142,8 @@ class MenuController
     public function delete($id)
     {
         $delete = $this->menus->where('id', '=', $id)->delete();
-        if ($delete) Alerts::success('Menü silindi.');
-        else Alerts::danger('Menü silinemedi!');
+        if ($delete) Alerts::success(_l('admin.pages.menu.messages.deleted'));
+        else Alerts::danger(_l('admin.pages.menu.messages.delete-fail'));
 
         return Response::json(['alerts' => Alerts::get(), 'status' => ($delete ? 1 : 0)]);
     }

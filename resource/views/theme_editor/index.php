@@ -25,7 +25,7 @@ use Core\Route;
                 </div>
                 <div class="float-end">
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-modal">
-                        Yeni Ekle
+                        <?= _l('admin.add-new') ?>
                     </button>
                 </div>
             </div>
@@ -35,9 +35,9 @@ use Core\Route;
                 <thead>
                     <!--begin::Table row-->
                     <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                        <th class="min-w-250px">Ad</th>
-                        <th class="min-w-10px">Boyut</th>
-                        <th class="min-w-125px">Son Değiştirme</th>
+                        <th class="min-w-250px"><?= _l('admin.pages.theme-editor.th-name') ?></th>
+                        <th class="min-w-10px"><?= _l('admin.pages.theme-editor.th-size') ?></th>
+                        <th class="min-w-125px"><?= _l('admin.pages.theme-editor.th-last-up-date') ?></th>
                         <th class="w-125px"></th>
                     </tr>
                     <!--end::Table row-->
@@ -99,7 +99,7 @@ use Core\Route;
                                         <!--begin::Menu-->
                                         <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-150px py-4" data-kt-menu="true">
                                             <div class="menu-item px-3">
-                                                <a href="#" class="menu-link text-danger btn btn-active-light-danger px-3" onwaiting="deleteLink(`<?= $link ?>`);" ask-modal>Sil</a>
+                                                <a href="#" class="menu-link text-danger btn btn-active-light-danger px-3" onwaiting="deleteLink(`<?= $link ?>`);" ask-modal><?= _l('admin.delete') ?></a>
                                             </div>
                                         </div>
                                         <!--end::Menu-->
@@ -123,7 +123,7 @@ use Core\Route;
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Yeni Ekle</h5>
+                <h5 class="modal-title"><?= _l('admin.add-new') ?></h5>
                 <!--begin::Close-->
                 <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
                     <span class="svg-icon svg-icon-2x"></span>
@@ -134,14 +134,14 @@ use Core\Route;
                 <input type="hidden" name="path" value="<?= $_GET['path'] ?? '/' ?>" required>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="name">Adı</label>
-                        <input type="text" name="name" id="name" class="form-control" placeholder="Dosya adı" autofocus autocomplete="off">
+                        <label for="name"><?= _l('admin.pages.theme-editor.th-name') ?></label>
+                        <input type="text" name="name" id="name" class="form-control" placeholder="<?= _l('admin.pages.theme-editor.th-name') ?>" autofocus autocomplete="off">
                     </div>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Kapat</button>
-                    <button type="button" class="btn btn-primary">Ekle</button>
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal"><?= _l('admin.close') ?></button>
+                    <button type="button" class="btn btn-primary"><?= _l('admin.add') ?></button>
                 </div>
             </form>
         </div>

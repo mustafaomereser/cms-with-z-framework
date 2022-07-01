@@ -7,7 +7,7 @@ use Core\Route;
 <div class="d-flex flex-stack mb-5">
     <!--begin::Search-->
     <div class="d-flex align-items-center position-relative my-1">
-        <input type="text" data-kt-docs-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Ara" />
+        <input type="text" data-kt-docs-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="<?= _l('admin.search') ?>" />
     </div>
     <!--end::Search-->
 
@@ -15,7 +15,7 @@ use Core\Route;
     <div class="d-flex justify-content-end" data-kt-docs-table-toolbar="base">
         <!--begin::Add customer-->
         <a href="<?= Route::name('admin.content.create') ?>" class="btn btn-primary">
-            Yazı Ekle
+            <?= _l('admin.pages.content.index.add-new') ?>
         </a>
     </div>
 </div>
@@ -24,12 +24,12 @@ use Core\Route;
     <thead>
         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
             <th class="text-center" width='90'>&nbsp;</th>
-            <th>Başlık</th>
-            <th>SEO Linki</th>
-            <th>Tip</th>
-            <th>Durum</th>
-            <th>Son Güncellenme Tarihi</th>
-            <th>Oluşturulduğu Tarih</th>
+            <th><?= _l('admin.pages.content.index.th-title') ?></th>
+            <th><?= _l('admin.pages.content.index.th-seo') ?></th>
+            <th><?= _l('admin.pages.content.index.th-type') ?></th>
+            <th><?= _l('admin.pages.content.index.th-status') ?></th>
+            <th><?= _l('admin.pages.content.index.th-last-up-date') ?></th>
+            <th><?= _l('admin.pages.content.index.th-create-date') ?></th>
             <th class="text-center" width='90'>&nbsp;</th>
         </tr>
     </thead>

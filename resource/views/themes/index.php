@@ -9,14 +9,14 @@ use Core\Route;
     <div class="app-container container-fluid">
         <div class="row g-5 g-xxl-10">
             <div class="col-12 mb-2 clearfix">
-                <h1 class="float-start">Temalar</h1>
+                <h1 class="float-start"><?= _l('admin.pages.themes.title') ?></h1>
                 <h1 class="float-end">(<?= count(Theme::list()) ?>)</h1>
             </div>
             <?php foreach (Theme::list() as $theme) : $information = Theme::information($theme) ?>
                 <div class="col-lg-6 col-12 mb-3">
-                    <button class="btn btn-active-light-danger text-danger" onwaiting="deleteTheme(this);" ask-modal>Sil</button>
-                    <div class="card border-0 bg-light theme cursor-pointer" id="<?= $theme ?>">
-                        <div class="card-body text-center">
+                    <button class="btn btn-active-light-danger text-danger" onwaiting="deleteTheme(this);" ask-modal><?= _l('admin.delete') ?></button>
+                    <div class="card border bg-light theme cursor-pointer" id="<?= $theme ?>">
+                        <div class="card-body text-center border">
                             <div>
                                 <b style="font-size: 15pt;"><?= $information['name'] ?></b>
                             </div>
@@ -56,8 +56,8 @@ use Core\Route;
 
 <script>
     function selectTheme(w) {
-        $('.theme').addClass('bg-light').removeClass('bg-info').removeClass('text-light');
-        $(w).addClass('bg-info').addClass('text-light').removeClass('bg-light');
+        $('.theme').removeClass('border-info');
+        $(w).addClass('border-info');
     }
 
     $('.theme').on('click', function() {
