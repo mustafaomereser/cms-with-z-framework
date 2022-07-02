@@ -17,6 +17,7 @@ return [
         'password' => 'Password',
         're-password' => 'Repeat Password',
         'email' => 'E-mail',
-        'confirm' => 'Confirm'
+        'confirm' => 'Confirm',
+        'currentpassword' => 'Current Password'
     ]
 ];

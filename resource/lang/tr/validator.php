@@ -17,6 +17,7 @@ return [
         'password' => 'Şifre',
         're-password' => 'Tekrar Şifre',
         'email' => 'E-Posta',
-        'confirm' => 'Onay'
+        'confirm' => 'Onay',
+        'currentpassword' => 'Mevcut Şifre'
     ]
 ];
