@@ -17,6 +17,7 @@ return [
     'delete' => 'Delete',
     'add' => 'Add',
     'none' => 'None',
+    'or' => 'Or',
 
     'here-is-none-option' => 'There are not this option.',
     'please-wait' => 'Please wait...',
@@ -30,6 +31,12 @@ return [
         'dark' => ['fonticon-moon fs-2', 'Dark'],
     ],
 
+    'email_address' => 'E-mail Address',
+    'password' => 'Password',
+    'fullname' => 'Full Name',
+
+    'allowed-file-types' => 'Allowed file types: {types}.',
+
     'menu' => [
         'branches' => [
             'design' => 'Design',
@@ -42,6 +49,12 @@ return [
     ],
 
     'pages' => [
+        'auth' => [
+            'welcome-again' => 'Welcome Again!',
+            'signin' => 'Sign In',
+            'continue' => 'Continue'
+        ],
+
         'dashboard' => [
             'index' => [
                 'title' => 'Dashboard',
@@ -134,6 +147,32 @@ return [
                 'folder-created' => 'Folder created!',
                 'folder-create-fail' => 'Failed to create folder!',
                 'folder-already-there' => 'Such a folder already exists.'
+            ]
+        ],
+
+        'user' => [
+            'profile' => [
+                'privillage' => 'Privillage',
+                'privillages' => [
+                    'User',
+                    'Administrator'
+                ]
+            ],
+            'settings' => [
+                'title' => 'Settings',
+                'overview' => 'Overview',
+                'sign-in-method' => 'Sign-in Methods',
+                'profile-details' => 'Profile Details',
+                'deactivate-account' => 'Deactive Account',
+
+                'deactive' => [
+                    'warning' => [
+                        'title' => 'Deactivating your account?',
+                        'content' => 'If you deactivate your account, you can not access that account anymore.'
+                    ],
+                    'i-confirm' => 'I confirm for deactivate my account.',
+                    'button' => 'Deactivate Account'
+                ]
             ]
         ]
     ],

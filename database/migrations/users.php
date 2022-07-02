@@ -10,10 +10,13 @@ class Users
             'id' => ['primary'],
             'priv' => ['int', 'default:0'],
             'username' => ['varchar:50', 'charset:utf8:general_ci'],
+            'name' => ['varchar:50', 'charset:utf8:general_ci'],
+            'surname' => ['varchar:50', 'charset:utf8:general_ci'],
             'password' => ['varchar:50', 'charset:utf8:general_ci'],
             'email' => ['varchar:50', 'charset:utf8:general_ci', 'unique'],
             'avatar' => ['text', 'charset:utf8:general_ci', 'default:/admin_assets/media/avatars/300-15.jpg'],
-            'api_token' => ['varchar:60', 'required', 'charset:utf8:general_ci']
+            'api_token' => ['varchar:60', 'required', 'charset:utf8:general_ci'],
+            'status' => ['int', 'default:1']
         ];
     }
 }

@@ -17,6 +17,7 @@ return [
     'delete' => 'Sil',
     'add' => 'Ekle',
     'none' => 'Yok',
+    'or' => 'Veya',
 
     'here-is-none-option' => 'Böyle bir seçenek yok.',
     'please-wait' => 'Lütfen bekleyiniz...',
@@ -30,6 +31,12 @@ return [
         'dark' => ['fonticon-moon fs-2', 'Siyah'],
     ],
 
+    'email_address' => 'E-mail Adres',
+    'password' => 'Şifre',
+    'fullname' => 'Tam Ad',
+
+    'allowed-file-types' => 'Kabul edilen dosya tipleri: {types}.',
+
     'menu' => [
         'branches' => [
             'design' => 'Tasarım',
@@ -42,6 +49,12 @@ return [
     ],
 
     'pages' => [
+        'auth' => [
+            'welcome-again' => 'Tekrar hoşgeldiniz!',
+            'signin' => 'Giriş Yap',
+            'continue' => 'Devam et'
+        ],
+
         'dashboard' => [
             'index' => [
                 'title' => 'Gösterge Paneli',
@@ -134,6 +147,39 @@ return [
                 'folder-created' => 'Klasör oluşturuldu!',
                 'folder-create-fail' => 'Klasör oluşturulamadı!',
                 'folder-already-there' => 'Böyle bir klasör zaten mevcut.'
+            ]
+        ],
+
+        'user' => [
+            'profile' => [
+                'privillage' => 'Yetki',
+                'privillages' => [
+                    'Kullanıcı',
+                    'Yönetici'
+                ]
+            ],
+            'settings' => [
+                'title' => 'Ayarlar',
+                'overview' => 'Genel Bakış',
+                'sign-in-method' => 'Giriş Metodları',
+                'profile-details' => 'Profil Detayları',
+                'deactivate-account' => 'Hesabı Devre Dışı Bırak',
+
+                'deactive' => [
+                    'warning' => [
+                        'title' => 'Hesabınızı Devre Dışı Bırakıyorsunuz',
+                        'content' => 'Hesabınızı devre dışı bıraktıktan sonra bir daha erişemezsiniz.'
+                    ],
+                    'i-confirm' => 'Hesabımın devre dışı bırakılmasını onaylıyorum.',
+                    'button' => 'Hesabımı devre dışı bırak'
+                ],
+
+                'messages' => [
+                    'deactive-account' => [
+                        'success' => 'Kullanıcı devre dışı bırakıldı.',
+                        'cannot' => 'Ana kullanıcıyı devre dışı bırakamazsınız.'
+                    ]
+                ]
             ]
         ]
     ],

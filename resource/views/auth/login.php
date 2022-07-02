@@ -10,17 +10,17 @@
                 <!--begin::Heading-->
                 <div class="text-center mb-10">
                     <!--begin::Title-->
-                    <h1 class="text-dark mb-3">Giriş Yap</h1>
+                    <h1 class="text-dark mb-3"><?= _l('admin.pages.auth.signin') ?></h1>
                     <!--end::Title-->
                 </div>
                 <!--begin::Heading-->
                 <!--begin::Input group-->
                 <div class="fv-row mb-10">
                     <!--begin::Label-->
-                    <label class="form-label fs-6 fw-bolder text-dark">E-mail</label>
+                    <label class="form-label fs-6 fw-bolder text-dark"><?= _l('admin.email_address') ?></label>
                     <!--end::Label-->
                     <!--begin::Input-->
-                    <input class="form-control form-control-lg form-control-solid" type="email" name="email" autocomplete="off" placeholder="E-mail adresiniz" autofocus required />
+                    <input class="form-control form-control-lg form-control-solid" type="email" name="email" autocomplete="off" placeholder="<?= _l('admin.email_address') ?>" autofocus required />
                     <!--end::Input-->
                 </div>
                 <!--end::Input group-->
@@ -28,16 +28,11 @@
                 <div class="fv-row mb-10">
                     <!--begin::Wrapper-->
                     <div class="d-flex flex-stack mb-2">
-                        <!--begin::Label-->
-                        <label class="form-label fw-bolder text-dark fs-6 mb-0">Şifre</label>
-                        <!--end::Label-->
-                        <!--begin::Link-->
-                        <a href="password-reset.html" class="link-primary fs-6 fw-bolder">Şifreni mi unuttun?</a>
-                        <!--end::Link-->
+                        <label class="form-label fw-bolder text-dark fs-6 mb-0"><?= _l('admin.password') ?></label>
                     </div>
                     <!--end::Wrapper-->
                     <!--begin::Input-->
-                    <input class="form-control form-control-lg form-control-solid" type="password" name="password" autocomplete="off" placeholder="Hesap Şifreniz" required />
+                    <input class="form-control form-control-lg form-control-solid" type="password" name="password" autocomplete="off" placeholder="<?= _l('admin.password') ?>" required />
                     <!--end::Input-->
                 </div>
                 <!--end::Input group-->
@@ -45,11 +40,11 @@
                 <div class="text-center">
                     <!--begin::Submit button-->
                     <button type="submit" class="btn btn-lg btn-primary w-100 mb-5">
-                        Devam et <i class="fa fa-angle-right float-end" style="padding-top: 12px;"></i>
+                        <?= _l('admin.pages.auth.continue') ?> <i class="fa fa-angle-right float-end" style="padding-top: 12px;"></i>
                     </button>
                     <!--end::Submit button-->
                     <!--begin::Separator-->
-                    <div class="text-center text-muted text-uppercase fw-bolder mb-5">Veya</div>
+                    <div class="text-center text-muted text-uppercase fw-bolder mb-5"><?= _l('admin.or') ?></div>
                     <!--end::Separator-->
                     <!--begin::Google link-->
                     <a href="#" class="btn btn-flex flex-center btn-light btn-lg w-100 mb-5 disabled" disabled>

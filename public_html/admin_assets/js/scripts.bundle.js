@@ -400,10 +400,10 @@ var KTDialer = function (element, options) {
 
     var _parse = function (val) {
         val = val
-            .replace(/[^0-9.-]/g, '')       // remove chars except number, hyphen, point. 
-            .replace(/(\..*)\./g, '$1')     // remove multiple points.
-            .replace(/(?!^)-/g, '')         // remove middle hyphen.
-            .replace(/^0+(\d)/gm, '$1');    // remove multiple leading zeros. <-- I added this.
+            .replace(/[^0-9.-]/g, '') // remove chars except number, hyphen, point. 
+            .replace(/(\..*)\./g, '$1') // remove multiple points.
+            .replace(/(?!^)-/g, '') // remove middle hyphen.
+            .replace(/^0+(\d)/gm, '$1'); // remove multiple leading zeros. <-- I added this.
 
         val = parseFloat(val);
 
@@ -1527,7 +1527,7 @@ var KTMenu = function (element, options) {
         KTUtil.data(the.element).set('menu', the);
     }
 
-    var _destroy = function () {  // todo
+    var _destroy = function () { // todo
 
     }
 
@@ -1669,7 +1669,7 @@ var KTMenu = function (element, options) {
         }
 
         // Remember last submenu type
-        KTUtil.data(item).set('type', _getItemSubType(item));  // updated
+        KTUtil.data(item).set('type', _getItemSubType(item)); // updated
     }
 
     // Hide item sub
@@ -1698,11 +1698,11 @@ var KTMenu = function (element, options) {
         var sub = _getItemSubElement(item);
 
         // Reset sub state if sub type is changed during the window resize
-        if (KTUtil.data(item).has('type') && KTUtil.data(item).get('type') !== _getItemSubType(item)) {  // updated
+        if (KTUtil.data(item).has('type') && KTUtil.data(item).get('type') !== _getItemSubType(item)) { // updated
             KTUtil.removeClass(item, 'hover');
             KTUtil.removeClass(item, 'show');
             KTUtil.removeClass(sub, 'show');
-        }  // updated
+        } // updated
     }
 
     // Update all item state classes if item sub type changed
@@ -1795,7 +1795,8 @@ var KTMenu = function (element, options) {
     var _getItemSubElement = function (item) {
         if (_isTriggerElement(item) === true) {
             return the.element;
-        } if (item.classList.contains('menu-sub') === true) {
+        }
+        if (item.classList.contains('menu-sub') === true) {
             return item;
         } else if (KTUtil.data(item).has('sub')) {
             return KTUtil.data(item).get('sub');
@@ -2619,23 +2620,23 @@ var KTPasswordMeter = function (element, options) {
     }
 
     var _checkLength = function () {
-        return the.inputElement.value.length >= the.options.minLength;  // 20 score
+        return the.inputElement.value.length >= the.options.minLength; // 20 score
     }
 
     var _checkLowercase = function () {
-        return /[a-z]/.test(the.inputElement.value);  // 20 score
+        return /[a-z]/.test(the.inputElement.value); // 20 score
     }
 
     var _checkUppercase = function () {
-        return /[A-Z]/.test(the.inputElement.value);  // 20 score
+        return /[A-Z]/.test(the.inputElement.value); // 20 score
     }
 
     var _checkDigit = function () {
-        return /[0-9]/.test(the.inputElement.value);  // 20 score
+        return /[0-9]/.test(the.inputElement.value); // 20 score
     }
 
     var _checkChar = function () {
-        return /[~`!#@$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/g.test(the.inputElement.value);  // 20 score
+        return /[~`!#@$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/g.test(the.inputElement.value); // 20 score
     }
 
     var _getCheckScore = function () {
@@ -3027,9 +3028,11 @@ var KTScroll = function (element, options) {
     var _getHeightType = function () {
         if (_getOption('height')) {
             return 'height';
-        } if (_getOption('min-height')) {
+        }
+        if (_getOption('min-height')) {
             return 'min-height';
-        } if (_getOption('max-height')) {
+        }
+        if (_getOption('max-height')) {
             return 'max-height';
         }
     }
@@ -3312,10 +3315,10 @@ var KTSearch = function (element, options) {
 
     // Default Options
     var defaultOptions = {
-        minLength: 2,  // Miniam text lenght to query search
-        keypress: true,  // Enable search on keypress 
-        enter: true,  // Enable search on enter key press
-        layout: 'menu',  // Use 'menu' or 'inline' layout options to display search results
+        minLength: 2, // Miniam text lenght to query search
+        keypress: true, // Enable search on keypress 
+        enter: true, // Enable search on enter key press
+        layout: 'menu', // Use 'menu' or 'inline' layout options to display search results
         responsive: null, // Pass integer value or bootstrap compatible breakpoint key(sm,md,lg,xl,xxl) to enable reponsive form mode for device width below the breakpoint value
         showOnFocus: true // Always show menu on input focus
     };
@@ -4146,7 +4149,7 @@ var KTSticky = function (element, options) {
         st = KTUtil.getScrollTop();
         diff = document.documentElement.scrollHeight - window.innerHeight - KTUtil.getScrollTop();
 
-        if (reverse === true) {  // Release on reverse scroll mode
+        if (reverse === true) { // Release on reverse scroll mode
             if (st > offset) {
                 if (body.hasAttribute(the.attributeName) === false) {
 
@@ -4884,7 +4887,7 @@ if (!Element.prototype.matches) {
     Element.prototype.matches = function (s) {
         var matches = (this.document || this.ownerDocument).querySelectorAll(s),
             i = matches.length;
-        while (--i >= 0 && matches.item(i) !== this) { }
+        while (--i >= 0 && matches.item(i) !== this) {}
         return i > -1;
     };
 }
@@ -5489,7 +5492,8 @@ var KTUtil = function () {
         },
 
         index: function (el) {
-            var c = el.parentNode.children, i = 0;
+            var c = el.parentNode.children,
+                i = 0;
             for (; i < c.length; i++)
                 if (c[i] == el) return i;
         },
@@ -5669,7 +5673,10 @@ var KTUtil = function () {
             // disconnected node in IE throws an error
 
             if (!el.getClientRects().length) {
-                return { top: 0, left: 0 };
+                return {
+                    top: 0,
+                    left: 0
+                };
             }
 
             // Get document-relative position by adding viewport scroll to viewport-relative gBCR
@@ -5757,7 +5764,7 @@ var KTUtil = function () {
 
             // Create mock done() function if necessary
             if (typeof done !== 'function') {
-                done = function () { };
+                done = function () {};
             }
 
             // Pick implementation (requestAnimationFrame | setTimeout)
@@ -5874,7 +5881,8 @@ var KTUtil = function () {
                     // convert other units to pixels on IE
                     if (/^\d+(em|pt|%|ex)?$/i.test(value)) {
                         return (function (value) {
-                            var oldLeft = el.style.left, oldRsLeft = el.runtimeStyle.left;
+                            var oldLeft = el.style.left,
+                                oldRsLeft = el.runtimeStyle.left;
 
                             el.runtimeStyle.left = el.currentStyle.left;
                             el.style.left = value || 0;
@@ -5948,7 +5956,7 @@ var KTUtil = function () {
                 el.style.cssText = 'display: block; overflow: hidden;';
 
                 if (calcPaddingTop) {
-                    KTUtil.animate(0, calcPaddingTop, speed, function (value) {//
+                    KTUtil.animate(0, calcPaddingTop, speed, function (value) { //
                         el.style.paddingTop = value + 'px';
                     }, 'linear', function () {
                         el.style.paddingTop = '';
@@ -6211,7 +6219,9 @@ var KTUtil = function () {
         },
 
         snakeToCamel: function (s) {
-            return s.replace(/(\-\w)/g, function (m) { return m[1].toUpperCase(); });
+            return s.replace(/(\-\w)/g, function (m) {
+                return m[1].toUpperCase();
+            });
         },
 
         filterBoolean: function (val) {
@@ -6313,7 +6323,7 @@ var KTUtil = function () {
 
                 try {
                     value = JSON.parse(jsonStr);
-                } catch (e) { }
+                } catch (e) {}
             }
 
             return value;
@@ -6706,12 +6716,12 @@ var KTApp = function () {
         });
 
         /*
-        * Hacky fix for a bug in select2 with jQuery 3.6.0's new nested-focus "protection"
-        * see: https://github.com/select2/select2/issues/5993
-        * see: https://github.com/jquery/jquery/issues/4382
-        *
-        * TODO: Recheck with the select2 GH issue and remove once this is fixed on their side
-        */
+         * Hacky fix for a bug in select2 with jQuery 3.6.0's new nested-focus "protection"
+         * see: https://github.com/select2/select2/issues/5993
+         * see: https://github.com/jquery/jquery/issues/4382
+         *
+         * TODO: Recheck with the select2 GH issue and remove once this is fixed on their side
+         */
 
         if (select2FocusFixInitialized === false) {
             select2FocusFixInitialized = true;
@@ -6841,11 +6851,8 @@ var KTApp = function () {
                         try {
                             // convert json string to object
                             tnsOptions[optionName] = JSON.parse(jsonStr);
-                        }
-                        catch (e) {
-                        }
-                    }
-                    else {
+                        } catch (e) {}
+                    } else {
                         tnsOptions[optionName] = checkBool(el.getAttribute(attrName));
                     }
                 }
@@ -7136,8 +7143,12 @@ var KTAppLayoutBuilder = function () {
 
                     toastr.success(
                         "Preview has been updated with current configured layout.",
-                        "Preview updated!",
-                        { timeOut: 0, extendedTimeOut: 0, closeButton: true, closeDuration: 0 }
+                        "Preview updated!", {
+                            timeOut: 0,
+                            extendedTimeOut: 0,
+                            closeButton: true,
+                            closeDuration: 0
+                        }
                     );
 
                     setTimeout(function () {
@@ -7147,8 +7158,12 @@ var KTAppLayoutBuilder = function () {
                 error: function (response) {
                     toastr.error(
                         "Please try it again later.",
-                        "Something went wrong!",
-                        { timeOut: 0, extendedTimeOut: 0, closeButton: true, closeDuration: 0 }
+                        "Something went wrong!", {
+                            timeOut: 0,
+                            extendedTimeOut: 0,
+                            closeButton: true,
+                            closeDuration: 0
+                        }
                     );
                 },
                 complete: function () {
@@ -7164,8 +7179,12 @@ var KTAppLayoutBuilder = function () {
 
             toastr.success(
                 "Process has been started and it may take a while.",
-                "Generating HTML!",
-                { timeOut: 0, extendedTimeOut: 0, closeButton: true, closeDuration: 0 }
+                "Generating HTML!", {
+                    timeOut: 0,
+                    extendedTimeOut: 0,
+                    closeButton: true,
+                    closeDuration: 0
+                }
             );
 
             // Show progress
@@ -7198,8 +7217,12 @@ var KTAppLayoutBuilder = function () {
                 error: function (response) {
                     toastr.error(
                         "Please try it again later.",
-                        "Something went wrong!",
-                        { timeOut: 0, extendedTimeOut: 0, closeButton: true, closeDuration: 0 }
+                        "Something went wrong!", {
+                            timeOut: 0,
+                            extendedTimeOut: 0,
+                            closeButton: true,
+                            closeDuration: 0
+                        }
                     );
 
                     exportButton.removeAttribute("data-kt-indicator");
@@ -7232,8 +7255,12 @@ var KTAppLayoutBuilder = function () {
 
                     toastr.success(
                         "Preview has been successfully reset and the page will be reloaded.",
-                        "Reset Preview!",
-                        { timeOut: 0, extendedTimeOut: 0, closeButton: true, closeDuration: 0 }
+                        "Reset Preview!", {
+                            timeOut: 0,
+                            extendedTimeOut: 0,
+                            closeButton: true,
+                            closeDuration: 0
+                        }
                     );
 
                     setTimeout(function () {
@@ -7243,8 +7270,12 @@ var KTAppLayoutBuilder = function () {
                 error: function (response) {
                     toastr.error(
                         "Please try it again later.",
-                        "Something went wrong!",
-                        { timeOut: 0, extendedTimeOut: 0, closeButton: true, closeDuration: 0 }
+                        "Something went wrong!", {
+                            timeOut: 0,
+                            extendedTimeOut: 0,
+                            closeButton: true,
+                            closeDuration: 0
+                        }
                     );
                 },
                 complete: function () {
@@ -7447,7 +7478,142 @@ toastr.danger = toastr.error;
 const csrf = $('[name="CSRF-X-TOKEN"]').attr('content'),
     preAdmin = '/admin';
 
+$.ajaxSetup({
+    error: (e) => {
+        const response = JSON.parse(e.responseText),
+            status = e.status;
+
+        let show_notification = 1;
+        if (status == 401) {
+            show_notification = 0;
+            location.reload();
+        }
+
+        if (show_notification)
+            for (let index of Object.keys(response)) response[index].forEach(text => toastr['danger'](text));
+    },
+});
+
 $(() => {
+
+    $.core = {
+        numberFormat: (number, decimals, dec_point, thousands_sep) => {
+            // Strip all characters but numerical ones.
+            number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
+            var n = !isFinite(+number) ? 0 : +number,
+                prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+                sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+                dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+                s = '',
+                toFixedFix = function (n, prec) {
+                    var k = Math.pow(10, prec);
+                    return '' + Math.round(n * k) / k;
+                };
+            // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+            s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+
+            if (s[0].length > 3) s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+
+            if ((s[1] || '').length < prec) {
+                s[1] = s[1] || '';
+                s[1] += new Array(prec - s[1].length + 1).join('0');
+            }
+            return s.join(dec);
+        },
+
+        cookie: {
+            getCookie: function (name = null) {
+                let cookies = document.cookie.split('; '),
+                    _cookies = {};
+
+                cookies.forEach(function (item, index) {
+                    delete cookies[index];
+
+                    let cookie = item.split('='),
+                        val = "";
+
+                    cookie.forEach(function (_v, _i) {
+                        if (_i != 0)
+                            val += _v;
+                    });
+
+                    if (val) _cookies[cookie[0]] = val;
+                });
+
+                if (name) return _cookies[name];
+                return _cookies;
+            },
+            setCookie: function (name, val) {
+                document.cookie = `${name}=${val}; expires=Thu, 18 Dec 2040 12:00:00 UTC; path=/`;
+            },
+            deleteCookie: function (name) {
+                document.cookie = `${name}=; expires=Thu, 18 Dec 1970 12:00:00 UTC; path=/`
+            }
+        },
+
+        SToA: (form) => {
+            let arr = {};
+
+            $(form).find('[name]').each((index, item) => {
+                item = $(item);
+
+                const type = item.attr('type');
+
+                let verify = 0;
+                if (type == 'checkbox' || type == 'radio') {
+                    if (item.is(':checked')) verify++;
+                } else {
+                    verify++;
+                }
+
+                if (verify == 1) arr[item.attr('name')] = item.val() ? item.val() : item.html();
+            });
+
+            return arr;
+        },
+
+        formData: (form) => {
+            let data = new FormData();
+
+            $(form).find('[name]').each((index, _item) => {
+                item = $(_item);
+                const type = item.attr('type'),
+                    name = item.attr('name');
+
+                if (type != 'file') {
+                    let verify = 0;
+                    if (type == 'checkbox' || type == 'radio') {
+                        if (item.is(':checked')) verify++;
+                    } else {
+                        verify++;
+                    }
+
+                    if (verify == 1) data.append(name, (item.val() ? item.val() : item.html()));
+                } else {
+                    const files = _item.files;
+                    for (let i of Object.keys(files)) data.append(name + (i > 0 ? `-${i}` : ''), files[i]);
+                }
+            });
+
+            return data;
+        },
+
+        redirect: (url = "/", timeSec = 0) => {
+            setTimeout(() => {
+                location.href = url;
+            }, (timeSec * 1000));
+        },
+
+        ajaxComplete: (request, callback) => {
+            interval = setInterval(() => {
+                if (request.readyState == 4) {
+                    clearInterval(interval);
+                    return callback(request);
+                }
+            }, 0);
+        },
+    };
+
     let url = document.URL.split('?')[0].split('#')[0];
     if ($(`.menu-accordion [href="${url}"]`).length) {
         $(`[href="${url}"]`).addClass('active');
@@ -7462,7 +7628,9 @@ $(() => {
     $.selectData(true);
 
     $.showAlerts = (list) => {
-        for (let index of Object.keys(list)) toastr[list[index][0]](list[index][1]);
+        for (let index of Object.keys(list)) try {
+            toastr[list[index][0]](list[index][1]);
+        } catch (err) {}
     };
 
     // System methods
@@ -7474,7 +7642,7 @@ $(() => {
                 _token: csrf
             }, e => {
                 $.showAlerts(e.alerts);
-                if (e.status) if (callback) callback(id, e);
+                if (e.status && callback) callback(id, e);
             });
         }
 

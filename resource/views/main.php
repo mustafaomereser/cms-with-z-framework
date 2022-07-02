@@ -1798,7 +1798,7 @@ use Core\Route;
                                     <!--end::Menu separator-->
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-5">
-                                        <a href="account/overview.html" class="menu-link px-5"><?= _l('admin.my-profile') ?></a>
+                                        <a href="<?= Route::name('admin.user.show', ['id' => Auth::user()['username']]) ?>" class="menu-link px-5"><?= _l('admin.my-profile') ?></a>
                                     </div>
                                     <!--end::Menu item-->
 
@@ -1833,7 +1833,7 @@ use Core\Route;
                                     <!--end::Menu item-->
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-5 my-1">
-                                        <a href="account/settings.html" class="menu-link px-5"><?= _l('admin.account-settings') ?></a>
+                                        <a href="<?= Route::name('admin.user.index') ?>" class="menu-link px-5"><?= _l('admin.account-settings') ?></a>
                                     </div>
                                     <!--end::Menu item-->
                                     <!--begin::Menu item-->

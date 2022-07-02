@@ -46,7 +46,7 @@ use Core\Facedas\Config;
                         <!--end::Title-->
                         <!--begin::Description-->
                         <p class="fw-bold fs-2 text-white">
-                            <?= Config::get('app.title') ?>'a tekrar hoşgeldiniz, içerik yönetim paneline sağ taraftan giriş yapabilir ve işlemlerinize başlayabilirsiniz.
+                            <?= _l('admin.pages.auth.welcome-again') ?>
                         </p>
                         <!--end::Description-->
                     </div>
@@ -58,6 +58,13 @@ use Core\Facedas\Config;
                 <!--end::Wrapper-->
             </div>
             <!--begin::Aside-->
+            <div class="ms-3 mt-2 position-lg-relative">
+                Made with <a class="text-dark text-hover-danger" href="https://github.com/mustafaomereser/Z-Framework-php-mvc" target="_blank"><b><?= Config::get('app.title') ?></b></a>
+                By <a class="text-dark text-hover-danger" href="https://github.com/mustafaomereser" target="_blank"><b>Mustafa Ömer ESER</b></a>
+                <div class="position-absolute" style="bottom: 10px; left: 10px;">
+                    <a class="text-dark text-hover-danger" href="https://github.com/mustafaomereser/cms-with-z-framework" target="_blank"><b>This CMS Repository</b></a>
+                </div>
+            </div>
             <!--body-->
         </div>
         <!--end::Authentication - Sign-in-->

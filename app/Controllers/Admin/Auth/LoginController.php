@@ -59,7 +59,7 @@ class LoginController
             'password' => ['required']
         ]);
 
-        if (Auth::attempt(['email' => $validated['email'], 'password' => $validated['password']])) redirect(Route::$preURL);
+        if (Auth::attempt(['email' => $validated['email'], 'password' => $validated['password'], 'status' => 1])) redirect(Route::$preURL);
         else Alerts::danger('E-mail veya Şifre yanlış.');
 
         back();

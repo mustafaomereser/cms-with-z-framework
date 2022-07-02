@@ -42,8 +42,7 @@ use Core\Route;
                                 </div>
                             <?php endif; ?>
                             <div>
-                                <b>Açıklama;</b>
-                                <p><?= $information['description'] ?></p>
+                                <?= $information['description'] ?>
                             </div>
                         </div>
                     </div>

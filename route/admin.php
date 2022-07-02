@@ -13,6 +13,7 @@ use App\Controllers\Admin\HomeController;
 use App\Controllers\Admin\MenuController;
 use App\Controllers\Admin\ThemeEditorController;
 use App\Controllers\Admin\ThemesController;
+use App\Controllers\Admin\UserController;
 use Core\Facedas\Auth as FacedasAuth;
 
 Route::$preURL = '/admin';
@@ -34,6 +35,9 @@ Middleware::middleware([Auth::class, IsAdmin::class], function ($declined) {
     if (count($declined) && (strstr(uri(), Route::$preURL) && !Route::$called)) redirect(Route::name('admin.login.index'));
 
     Route::any('/', [HomeController::class, 'index'], ['name' => 'admin.home.index']);
+
+    Route::resource('/user', UserController::class);
+
     Route::resource('/content', ContentController::class);
     Route::resource('/menu', MenuController::class);
     Route::resource('/themes', ThemesController::class);
