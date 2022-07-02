@@ -38,6 +38,7 @@ echo Route::run();
 // forget alerts
 Core\Facedas\Alerts::unset();
 //
+call_user_func_array([new App\Models\Guest, 'record'], []);
 
 @$finish_time = microtime() + 0.003;
 if (@$_REQUEST['load_time']) echo "<script>console.log(`%c Page is in " . number_format(($finish_time - $start_time), 3, ',', '.') . "ms loaded.`, 'background: #000; color: #bada55')</script>";

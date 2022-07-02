@@ -5,6 +5,7 @@ use Core\Facedas\Alerts;
 use Core\Facedas\Auth;
 use Core\Facedas\Config;
 use Core\Facedas\Lang;
+use Core\Facedas\Str;
 use Core\Route;
 
 ?>
@@ -1761,7 +1762,7 @@ use Core\Route;
                                                 <div class="fw-bolder d-flex align-items-center fs-5">@<?= Auth::user()['username'] ?>
                                                     <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Pro</span>
                                                 </div>
-                                                <a href="#" class="fw-bold text-muted text-hover-primary fs-7"><?= Auth::user()['email'] ?></a>
+                                                <a href="#" class="fw-bold text-muted text-hover-primary fs-7"><?= Str::limit(Auth::user()['email'], 20) ?></a>
                                             </div>
                                             <!--end::Username-->
                                         </div>
@@ -1825,7 +1826,7 @@ use Core\Route;
                                 <a href="javascript:;" class="app-sidebar-username text-gray-800 text-hover-primary fs-6 fw-bold lh-0">@<?= Auth::user()['username'] ?></a>
                                 <!--end::Username-->
                                 <!--begin::Description-->
-                                <span class="app-sidebar-deckription text-gray-400 fw-bold d-block fs-8"><?= Auth::user()['email'] ?></span>
+                                <span class="app-sidebar-deckription text-gray-400 fw-bold d-block fs-8"><?= Str::limit(Auth::user()['email'], 16) ?></span>
                                 <!--end::Description-->
                             </div>
                             <!--end::Info-->
