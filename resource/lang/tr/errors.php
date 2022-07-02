@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'mail-sending-is-false' => 'Mail gönderimi kapalı.',
+
     'csrf' => [
         'no-verify' => 'CSRF token geçersiz.'
     ],

@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'mail-sending-is-false' => 'Mail sending is close.',
+
     'csrf' => [
         'no-verify' => 'CSRF not match.'
     ],
