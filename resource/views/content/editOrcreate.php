@@ -4,9 +4,11 @@ use App\Helpers\Components;
 use Core\Facedas\Lang;
 use Core\Route;
 
-@$content->content = json_decode($content->content, true);
-@$content->title = json_decode($content->title, true);
-@$content->slug = json_decode($content->slug, true);
+if (isset($content)) {
+    $content->content = json_decode($content->content, true);
+    $content->title = json_decode($content->title, true);
+    $content->slug = json_decode($content->slug, true);
+}
 ?>
 <link rel="stylesheet" type="text/css" href="/admin_assets/plugins/custom/tinymce/skins/ui/oxide/skin.min.css">
 
@@ -90,7 +92,7 @@ use Core\Route;
                             <div class="mb-5">
                                 <div class="fv-row fv-plugins-icon-container">
                                     <label class="fs-5 fw-bold mb-2">Yazı</label>
-                                    <textarea class="form-control content" name="content[<?= $lang ?>]" id="content"><?= $content->content[$lang] ?></textarea>
+                                    <textarea class="form-control content" name="content[<?= $lang ?>]" id="content"><?= @$content->content[$lang] ?></textarea>
                                 </div>
                             </div>
                         </div>
@@ -111,7 +113,6 @@ use Core\Route;
                     </div>
                 <?php endif; ?>
             </div>
-
 
             <div class="d-flex flex-column mb-5 fv-row">
                 <label class="d-flex align-items-center fs-5 fw-bold mb-2">

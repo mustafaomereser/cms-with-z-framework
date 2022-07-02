@@ -29,12 +29,12 @@ class MenuController
     }
 
     /** Show page | GET: /id
-     * @param string $type
+     * @param string $id
      * @return mixed
      */
-    public function show($type)
+    public function show($id)
     {
-        switch ($type) {
+        switch ($id) {
             case 'menus':
                 $data = ['data' => []];
                 $menus = $this->menus->get(true);
@@ -79,7 +79,7 @@ class MenuController
      */
     public function create()
     {
-        return view('menu.editOrCreate', ['title' => _l('admin.pages.menu.editOrcreate.create-title'), 'menus' => $this->menus->get(true), 'contents' => $this->contents->public()], 'main');
+        return view('menu.editOrcreate', ['title' => _l('admin.pages.menu.editOrcreate.create-title'), 'menus' => $this->menus->get(true), 'contents' => $this->contents->public()], 'main');
     }
 
     /** Edit page | GET: /id/edit
@@ -88,9 +88,8 @@ class MenuController
      */
     public function edit($id)
     {
-        return view('menu.editOrCreate', ['title' => _l('admin.pages.menu.editOrcreate.edit-title'), 'menus' => $this->menus->get(true), 'menu' => $this->menus->find($id, true), 'contents' => $this->contents->public()], 'main');
+        return view('menu.editOrcreate', ['title' => _l('admin.pages.menu.editOrcreate.edit-title'), 'menus' => $this->menus->get(true), 'menu' => $this->menus->find($id, true), 'contents' => $this->contents->public()], 'main');
     }
-
 
     public function setAll()
     {

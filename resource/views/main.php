@@ -1600,32 +1600,6 @@ use Core\Route;
                         <!--end::Menu wrapper-->
                     </div>
                     <!--end::Logo-->
-                    <div class="separator d-none d-lg-block"></div>
-                    <!--begin::Toolbar-->
-                    <div class="app-sidebar-toolbar d-flex flex-stack py-6 px-8">
-                        <!--begin::Select-->
-                        <select class="form-select form-select-custom fw-bolder" data-control="select2" data-placeholder="Select Project" data-hide-search="true">
-                            <option value="1" selected="selected">Select Project</option>
-                            <option value="2">Good CRM App</option>
-                            <option value="3">Oppo Booking Site</option>
-                            <option value="4">FinOptima SaaS</option>
-                            <option value="5">Degree Mobile App</option>
-                        </select>
-                        <!--end::Select-->
-                        <!--begin::Button-->
-                        <a href="#" class="btn btn-icon btn-custom fw-bolder flex-shrink-0 ms-3" data-bs-toggle="modal" data-bs-target="#kt_modal_create_project">
-                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr087.svg-->
-                            <span class="svg-icon svg-icon-2qx">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                    <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                                </svg>
-                            </span>
-                            <!--end::Svg Icon-->
-                        </a>
-                        <!--end::Button-->
-                    </div>
-                    <!--end::Toolbar-->
                     <div class="separator"></div>
                     <!--begin::Sidebar menu-->
                     <div class="app-sidebar-menu app-sidebar-menu-arrow hover-scroll-overlay-y my-5 my-lg-5 px-3" id="kt_app_sidebar_menu_wrapper" data-kt-scroll="true" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_app_sidebar_toolbar, #kt_app_sidebar_footer" data-kt-scroll-offset="0">

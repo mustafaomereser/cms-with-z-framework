@@ -31,12 +31,12 @@ class ContentController
     }
 
     /** Show page | GET: /id
-     * @param string $type
+     * @param string $id
      * @return mixed
      */
-    public function show($type)
+    public function show($id)
     {
-        switch ($type) {
+        switch ($id) {
             case 'contents':
                 $data = ['data' => []];
                 $contents = $this->contents->get(true);

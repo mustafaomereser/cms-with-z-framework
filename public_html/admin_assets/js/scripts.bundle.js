@@ -7484,7 +7484,7 @@ $.ajaxSetup({
             status = e.status;
 
         let show_notification = 1;
-        if (status == 401) {
+        if (status == 401 || status == 406) {
             show_notification = 0;
             location.reload();
         }
