@@ -3,9 +3,11 @@
 namespace App\Controllers\Admin;
 
 use App\Models\User;
+use Core\Crypter;
 use Core\Facedas\Alerts;
 use Core\Facedas\Auth;
 use Core\Facedas\Response;
+use Core\Helpers\File;
 use Core\Validator;
 
 class UserController
@@ -53,12 +55,59 @@ class UserController
         abort(404);
     }
 
+
+    private function updateProfile()
+    {
+        $validate = Validator::validate($_REQUEST, [
+            'name' => ['required'],
+            'surname' => ['required'],
+        ]);
+
+        if (isset($_FILES['avatar']) && !empty($_FILES['avatar']['name'])) {
+            $validate['avatar'] = File::upload("/admin_assets/media/avatars", $_FILES['avatar'], ['accept' => ['png', 'jpg', 'jpeg', 'gif']]);
+            Alerts::success(_l('admin.pages.user.settings.messages.change.avatar-updated'));
+        }
+
+        $this->user->where('id', '=', Auth::user()['id'])->update($validate);
+        Alerts::success(_l('admin.pages.user.settings.messages.change.settings-updated'));
+
+        return back();
+    }
+
     /** POST page | POST: /
      * @return mixed
      */
     public function store()
     {
-        abort(404);
+        if (isset($_REQUEST['name'])) return $this->updateProfile();
+
+        $validate = Validator::validate($_REQUEST, [
+            'currentpassword' => ['required'],
+        ]);
+
+        if (isset($_REQUEST['email'])) $validate = array_merge($validate, Validator::validate($_REQUEST, [
+            'email' => ['required', 'email']
+        ]));
+
+        if (isset($_REQUEST['password'])) {
+            $validate = array_merge($validate, Validator::validate($_REQUEST, [
+                'password' => ['required', 'same:confirm-password', 'min:8'],
+                'confirm-password' => ['required']
+            ]));
+            $validate['password'] = Crypter::encode($validate['password']);
+            unset($validate['confirm-password']);
+        }
+
+        if (Auth::user()['password'] == Crypter::encode($validate['currentpassword'])) {
+            unset($validate['currentpassword']);
+            $status = 1;
+            $this->user->where('id', '=', Auth::user()['id'])->update($validate);
+            Alerts::success(_l('admin.pages.user.settings.messages.change.settings-updated'));
+        } else {
+            Alerts::danger(_l('admin.pages.user.settings.messages.change.current-pass-invalid'));
+        }
+
+        return Response::json(array_merge(Alerts::get(), [$status ?? 0]));
     }
 
     /** Update page | PATCH/PUT: /id

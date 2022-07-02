@@ -16,6 +16,8 @@ return [
     'close' => 'Kapat',
     'delete' => 'Sil',
     'add' => 'Ekle',
+    'update' => 'Güncelle',
+    'reset' => 'Sıfırla',
     'none' => 'Yok',
     'or' => 'Veya',
 
@@ -178,6 +180,11 @@ return [
                     'deactive-account' => [
                         'success' => 'Kullanıcı devre dışı bırakıldı.',
                         'cannot' => 'Ana kullanıcıyı devre dışı bırakamazsınız.'
+                    ],
+                    'change' => [
+                        'current-pass-invalid' => 'Girdiğiniz mevcut şifre geçerli değil.',
+                        'settings-updated' => 'Ayarlar güncellendi.',
+                        'avatar-updated' => 'Avatar güncellendi.'
                     ]
                 ]
             ]

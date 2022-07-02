@@ -82,7 +82,7 @@ $lang = _l('admin.pages.user.settings');
                                     <div class="d-flex flex-column">
                                         <div class="fs-2 fw-bolder mb-1"><?= Auth::user()['name'] . " " . Auth::user()['surname'] ?></div>
                                         <div class="fs-5 text-info fw-bolder mb-1">@<?= Auth::user()['username'] ?></div>
-                                        <span class="text-gray-400 fs-6 fw-bold mb-5"><?= Auth::user()['email'] ?></span>
+                                        <span class="text-gray-400 fs-6 fw-bold mb-5" user-email><?= Auth::user()['email'] ?></span>
                                     </div>
                                     <!--end::Profile-->
                                 </div>
@@ -113,13 +113,14 @@ $lang = _l('admin.pages.user.settings');
                                 <!--begin::Label-->
                                 <div id="kt_signin_email">
                                     <div class="fs-6 fw-bolder mb-1"><?= _l('admin.email_address') ?></div>
-                                    <div class="fw-bold text-gray-600"><?= Auth::user()['email'] ?></div>
+                                    <div class="fw-bold text-gray-600" user-email><?= Auth::user()['email'] ?></div>
                                 </div>
                                 <!--end::Label-->
                                 <!--begin::Edit-->
                                 <div id="kt_signin_email_edit" class="flex-row-fluid d-none">
                                     <!--begin::Form-->
-                                    <form id="kt_signin_change_email" class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
+                                    <form id="change-email-form" class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate>
+                                        <?= csrf() ?>
                                         <div class="row mb-6">
                                             <div class="col-lg-6 mb-4 mb-lg-0">
                                                 <div class="fv-row mb-0 fv-plugins-icon-container">
@@ -130,15 +131,15 @@ $lang = _l('admin.pages.user.settings');
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="fv-row mb-0 fv-plugins-icon-container">
-                                                    <label for="confirmemailpassword" class="form-label fs-6 fw-bolder mb-3">Confirm Password</label>
-                                                    <input type="password" class="form-control form-control-lg form-control-solid" name="confirmemailpassword" id="confirmemailpassword">
+                                                    <label for="current-password1" class="form-label fs-6 fw-bolder mb-3">Current Password</label>
+                                                    <input type="password" class="form-control form-control-lg form-control-solid" name="currentpassword" id="current-password1">
                                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="d-flex">
-                                            <button id="kt_signin_submit" type="button" class="btn btn-primary me-2 px-6">Update Email</button>
-                                            <button id="kt_signin_cancel" type="button" class="btn btn-color-gray-400 btn-active-light-primary px-6">Cancel</button>
+                                            <button class="btn btn-primary me-2 px-6"><?= _l('admin.save') ?></button>
+                                            <button id="kt_signin_cancel" type="button" class="btn btn-color-gray-400 btn-active-light-primary px-6"><?= _l('admin.close') ?></button>
                                         </div>
                                         <div></div>
                                     </form>
@@ -147,7 +148,7 @@ $lang = _l('admin.pages.user.settings');
                                 <!--end::Edit-->
                                 <!--begin::Action-->
                                 <div id="kt_signin_email_button" class="ms-auto">
-                                    <button class="btn btn-light btn-active-light-primary">Change Email</button>
+                                    <button class="btn btn-light btn-active-light-primary"><?= _l('admin.update') ?></button>
                                 </div>
                                 <!--end::Action-->
                             </div>
@@ -166,34 +167,31 @@ $lang = _l('admin.pages.user.settings');
                                 <!--begin::Edit-->
                                 <div id="kt_signin_password_edit" class="flex-row-fluid d-none">
                                     <!--begin::Form-->
-                                    <form id="kt_signin_change_password" class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate>
+                                    <form id="change-password-form" class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate>
+                                        <?= csrf() ?>
                                         <div class="row mb-1">
                                             <div class="col-lg-4">
                                                 <div class="fv-row mb-0 fv-plugins-icon-container">
-                                                    <label for="currentpassword" class="form-label fs-6 fw-bolder mb-3">Current Password</label>
-                                                    <input type="password" class="form-control form-control-lg form-control-solid" name="currentpassword" id="currentpassword">
-                                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                                    <label for="current-password2" class="form-label fs-6 fw-bolder mb-3">Current Password</label>
+                                                    <input type="password" class="form-control form-control-lg form-control-solid" name="currentpassword" id="current-password2">
                                                 </div>
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="fv-row mb-0 fv-plugins-icon-container">
-                                                    <label for="newpassword" class="form-label fs-6 fw-bolder mb-3">New Password</label>
-                                                    <input type="password" class="form-control form-control-lg form-control-solid" name="newpassword" id="newpassword">
-                                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                                    <label for="password" class="form-label fs-6 fw-bolder mb-3">New Password</label>
+                                                    <input type="password" class="form-control form-control-lg form-control-solid" name="password" id="password">
                                                 </div>
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="fv-row mb-0 fv-plugins-icon-container">
-                                                    <label for="confirmpassword" class="form-label fs-6 fw-bolder mb-3">Confirm New Password</label>
-                                                    <input type="password" class="form-control form-control-lg form-control-solid" name="confirmpassword" id="confirmpassword">
-                                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                                    <label for="confirm-password" class="form-label fs-6 fw-bolder mb-3">Confirm New Password</label>
+                                                    <input type="password" class="form-control form-control-lg form-control-solid" name="confirm-password" id="confirm-password">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-text mb-5">Password must be at least 8 character and contain symbols</div>
                                         <div class="d-flex">
-                                            <button id="kt_password_submit" type="button" class="btn btn-primary me-2 px-6">Update Password</button>
-                                            <button id="kt_password_cancel" type="button" class="btn btn-color-gray-400 btn-active-light-primary px-6">Cancel</button>
+                                            <button class="btn btn-primary me-2 px-6"><?= _l('admin.reset') ?></button>
+                                            <button id="kt_password_cancel" type="button" class="btn btn-color-gray-400 btn-active-light-primary px-6"><?= _l('admin.close') ?></button>
                                         </div>
                                         <div></div>
                                     </form>
@@ -202,7 +200,7 @@ $lang = _l('admin.pages.user.settings');
                                 <!--end::Edit-->
                                 <!--begin::Action-->
                                 <div id="kt_signin_password_button" class="ms-auto">
-                                    <button class="btn btn-light btn-active-light-primary">Reset Password</button>
+                                    <button class="btn btn-light btn-active-light-primary"><?= _l('admin.reset') ?></button>
                                 </div>
                                 <!--end::Action-->
                             </div>
@@ -254,7 +252,8 @@ $lang = _l('admin.pages.user.settings');
                     <!--begin::Content-->
                     <div id="kt_account_settings_profile_details" class="collapse show">
                         <!--begin::Form-->
-                        <form id="kt_account_profile_details_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
+                        <form id="profile-details-form" method="POST" class="form fv-plugins-bootstrap5 fv-plugins-framework" enctype="multipart/form-data" novalidate>
+                            <?= csrf() ?>
                             <!--begin::Card body-->
                             <div class="card-body border-top p-9">
                                 <!--begin::Input group-->
@@ -274,7 +273,6 @@ $lang = _l('admin.pages.user.settings');
                                                 <i class="bi bi-pencil-fill fs-7"></i>
                                                 <!--begin::Inputs-->
                                                 <input type="file" name="avatar" accept="<?= $fileTypes = '.gif, .png, .jpg, .jpeg' ?>">
-                                                <input type="hidden" name="avatar_remove">
                                                 <!--end::Inputs-->
                                             </label>
                                             <!--end::Label-->
@@ -308,14 +306,12 @@ $lang = _l('admin.pages.user.settings');
                                         <div class="row">
                                             <!--begin::Col-->
                                             <div class="col-lg-6 fv-row fv-plugins-icon-container">
-                                                <input type="text" name="fname" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" value="<?= Auth::user()['name'] ?>">
-                                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                                                <input type="text" name="name" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" value="<?= Auth::user()['name'] ?>">
                                             </div>
                                             <!--end::Col-->
                                             <!--begin::Col-->
                                             <div class="col-lg-6 fv-row fv-plugins-icon-container">
-                                                <input type="text" name="lname" class="form-control form-control-lg form-control-solid" value="<?= Auth::user()['surname'] ?>">
-                                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                                                <input type="text" name="surname" class="form-control form-control-lg form-control-solid" value="<?= Auth::user()['surname'] ?>">
                                             </div>
                                             <!--end::Col-->
                                         </div>
@@ -411,6 +407,21 @@ $lang = _l('admin.pages.user.settings');
 
 <script>
     $(() => {
+        $('#change-password-form').on('submit', function(_) {
+            _.preventDefault();
+            $.post('<?= Route::name('admin.user.store') ?>', $.core.SToA(this), e => $.showAlerts(e));
+        });
+
+        $('#change-email-form').on('submit', function(_) {
+            _.preventDefault();
+            let data = $.core.SToA(this);
+            $.post('<?= Route::name('admin.user.store') ?>', data, e => {
+                $.showAlerts(e);
+                let status = e.pop();
+                if (status == 1) $('[user-email]').html(data['email']);
+            });
+        });
+
         $('#deactive-account-form').on('submit', function(_) {
             _.preventDefault();
             $.post('<?= Route::name('admin.user.delete', ['id' => true]) ?>', $.core.SToA(this), e => {

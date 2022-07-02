@@ -16,6 +16,8 @@ return [
     'close' => 'Close',
     'delete' => 'Delete',
     'add' => 'Add',
+    'update' => 'Update',
+    'reset' => 'Reset',
     'none' => 'None',
     'or' => 'Or',
 
@@ -172,6 +174,19 @@ return [
                     ],
                     'i-confirm' => 'I confirm for deactivate my account.',
                     'button' => 'Deactivate Account'
+                ],
+
+
+                'messages' => [
+                    'deactive-account' => [
+                        'success' => 'Account is deactivated.',
+                        'cannot' => 'You cannot disable the main user.'
+                    ],
+                    'change' => [
+                        'current-pass-invalid' => 'The current password you entered is not valid.',
+                        'settings-updated' => 'Settings is updated.',
+                        'avatar-updated' => 'Avatar updated.'
+                    ]
                 ]
             ]
         ]

@@ -4887,7 +4887,7 @@ if (!Element.prototype.matches) {
     Element.prototype.matches = function (s) {
         var matches = (this.document || this.ownerDocument).querySelectorAll(s),
             i = matches.length;
-        while (--i >= 0 && matches.item(i) !== this) {}
+        while (--i >= 0 && matches.item(i) !== this) { }
         return i > -1;
     };
 }
@@ -5764,7 +5764,7 @@ var KTUtil = function () {
 
             // Create mock done() function if necessary
             if (typeof done !== 'function') {
-                done = function () {};
+                done = function () { };
             }
 
             // Pick implementation (requestAnimationFrame | setTimeout)
@@ -6323,7 +6323,7 @@ var KTUtil = function () {
 
                 try {
                     value = JSON.parse(jsonStr);
-                } catch (e) {}
+                } catch (e) { }
             }
 
             return value;
@@ -6851,7 +6851,7 @@ var KTApp = function () {
                         try {
                             // convert json string to object
                             tnsOptions[optionName] = JSON.parse(jsonStr);
-                        } catch (e) {}
+                        } catch (e) { }
                     } else {
                         tnsOptions[optionName] = checkBool(el.getAttribute(attrName));
                     }
@@ -7144,11 +7144,11 @@ var KTAppLayoutBuilder = function () {
                     toastr.success(
                         "Preview has been updated with current configured layout.",
                         "Preview updated!", {
-                            timeOut: 0,
-                            extendedTimeOut: 0,
-                            closeButton: true,
-                            closeDuration: 0
-                        }
+                        timeOut: 0,
+                        extendedTimeOut: 0,
+                        closeButton: true,
+                        closeDuration: 0
+                    }
                     );
 
                     setTimeout(function () {
@@ -7159,11 +7159,11 @@ var KTAppLayoutBuilder = function () {
                     toastr.error(
                         "Please try it again later.",
                         "Something went wrong!", {
-                            timeOut: 0,
-                            extendedTimeOut: 0,
-                            closeButton: true,
-                            closeDuration: 0
-                        }
+                        timeOut: 0,
+                        extendedTimeOut: 0,
+                        closeButton: true,
+                        closeDuration: 0
+                    }
                     );
                 },
                 complete: function () {
@@ -7180,11 +7180,11 @@ var KTAppLayoutBuilder = function () {
             toastr.success(
                 "Process has been started and it may take a while.",
                 "Generating HTML!", {
-                    timeOut: 0,
-                    extendedTimeOut: 0,
-                    closeButton: true,
-                    closeDuration: 0
-                }
+                timeOut: 0,
+                extendedTimeOut: 0,
+                closeButton: true,
+                closeDuration: 0
+            }
             );
 
             // Show progress
@@ -7218,11 +7218,11 @@ var KTAppLayoutBuilder = function () {
                     toastr.error(
                         "Please try it again later.",
                         "Something went wrong!", {
-                            timeOut: 0,
-                            extendedTimeOut: 0,
-                            closeButton: true,
-                            closeDuration: 0
-                        }
+                        timeOut: 0,
+                        extendedTimeOut: 0,
+                        closeButton: true,
+                        closeDuration: 0
+                    }
                     );
 
                     exportButton.removeAttribute("data-kt-indicator");
@@ -7256,11 +7256,11 @@ var KTAppLayoutBuilder = function () {
                     toastr.success(
                         "Preview has been successfully reset and the page will be reloaded.",
                         "Reset Preview!", {
-                            timeOut: 0,
-                            extendedTimeOut: 0,
-                            closeButton: true,
-                            closeDuration: 0
-                        }
+                        timeOut: 0,
+                        extendedTimeOut: 0,
+                        closeButton: true,
+                        closeDuration: 0
+                    }
                     );
 
                     setTimeout(function () {
@@ -7271,11 +7271,11 @@ var KTAppLayoutBuilder = function () {
                     toastr.error(
                         "Please try it again later.",
                         "Something went wrong!", {
-                            timeOut: 0,
-                            extendedTimeOut: 0,
-                            closeButton: true,
-                            closeDuration: 0
-                        }
+                        timeOut: 0,
+                        extendedTimeOut: 0,
+                        closeButton: true,
+                        closeDuration: 0
+                    }
                     );
                 },
                 complete: function () {
@@ -7573,10 +7573,12 @@ $(() => {
         },
 
         formData: (form) => {
-            let data = new FormData();
+            return;
+            return new FormData(form);
 
+            const formData = new FormData();
             $(form).find('[name]').each((index, _item) => {
-                item = $(_item);
+                let item = $(_item);
                 const type = item.attr('type'),
                     name = item.attr('name');
 
@@ -7588,14 +7590,14 @@ $(() => {
                         verify++;
                     }
 
-                    if (verify == 1) data.append(name, (item.val() ? item.val() : item.html()));
+                    if (verify == 1) formData.append(name, (item.val() ? item.val() : item.html()));
                 } else {
                     const files = _item.files;
-                    for (let i of Object.keys(files)) data.append(name + (i > 0 ? `-${i}` : ''), files[i]);
+                    for (let i of Object.keys(files)) formData.append(name + (i > 0 ? `-${i}` : ''), files[i]);
                 }
             });
 
-            return data;
+            return formData;
         },
 
         redirect: (url = "/", timeSec = 0) => {
@@ -7630,7 +7632,7 @@ $(() => {
     $.showAlerts = (list) => {
         for (let index of Object.keys(list)) try {
             toastr[list[index][0]](list[index][1]);
-        } catch (err) {}
+        } catch (err) { }
     };
 
     // System methods
