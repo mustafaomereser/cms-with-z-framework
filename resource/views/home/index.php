@@ -32,7 +32,7 @@ use Core\Route;
                         <!--begin::Title-->
                         <h3 class="card-title align-items-start flex-column">
                             <span class="card-label fw-bolder text-dark fs-2hx"><?= number_format($guest_count, 0) ?></span>
-                            <span class="text-gray-400 mt-1 fw-bold fs-6">Guest this month</span>
+                            <span class="text-gray-400 mt-1 fw-bold fs-6"><?=_l('admin.pages.dashboard.index.guest-this-month')?></span>
                         </h3>
                         <!--end::Title-->
                     </div>

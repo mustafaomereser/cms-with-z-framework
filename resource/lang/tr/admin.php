@@ -64,7 +64,9 @@ return [
                 'content' => [
                     'Yazı oluşturarak içeriğinizi doldurabilirsiniz.',
                     'Ana sayfanızı güzel şekilde düzenleyebilirsiniz.'
-                ]
+                ],
+
+                'guest-this-month' => 'Bu ay ziyaretçi sayısı'
             ]
         ],
         'content' => [

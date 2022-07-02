@@ -64,7 +64,9 @@ return [
                 'content' => [
                     'You can fill your content by creating a post.',
                     'You can organize your homepage beautifully.'
-                ]
+                ],
+
+                'guest-this-month' => 'Guest this month'
             ]
         ],
         'content' => [
