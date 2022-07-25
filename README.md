@@ -1,7 +1,5 @@
 # cms-with-z-framework
 
-Admin theme allow just Turkish
-
 create a database
 connect your database
 
